@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>【读书笔记】精通Cocos2d-x游戏开发(基础卷)：程序设计思想札记 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                【读书笔记】精通Cocos2d-x游戏开发(基础卷)：程序设计思想札记
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-07-24 19:24">
+                    2020年7月24日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    4.6k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    48
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="【读书笔记】精通Cocos2d-x游戏开发-基础卷-：程序设计思想札记"><a href="#【读书笔记】精通Cocos2d-x游戏开发-基础卷-：程序设计思想札记" class="headerlink" title="【读书笔记】精通Cocos2d-x游戏开发(基础卷)：程序设计思想札记"></a>【读书笔记】精通Cocos2d-x游戏开发(基础卷)：程序设计思想札记</h1><h1 id="程序设计思想札记"><a href="#程序设计思想札记" class="headerlink" title="程序设计思想札记"></a>程序设计思想札记</h1><p>这本书是我从2020-6-16开始学习的，目的大概是为了完成小学期的作业吧，书中有一句话启发了我，大概意思是“编程学习的是思想，而不是记忆代码。”我觉得很有道理，于是打算用这篇札记记录自己学到的程序设计<strong>思想</strong>，尽量用脱离具体实现的方式将优劣势讲清楚，便于以后独立设计一个系统时来参考。但一些总结性的东西会具体写出来。</p>
+<p>这篇笔记可以看作读书笔记，也可以看作大作业的心得总结，当然详细的总结会放在技术文档和开发日志里，这里只是写一些闲言碎语吧。</p>
+<hr>
+<h3 id="可读性和可维护性：C-变量命名规则"><a href="#可读性和可维护性：C-变量命名规则" class="headerlink" title="可读性和可维护性：C++变量命名规则"></a>可读性和可维护性：C++变量命名规则</h3><p>变量命名指南：</p>
+<ul>
+<li>不在变量名中写变量类型：减少重复和低效</li>
+<li>减少容易混淆的词：英语中很多词无法从部分推出整体词义，那么应当用构词法描述一个变量</li>
+<li>尽可能具体，方法命名要一目了然</li>
+<li>用稍长的变量名代替简短变量名+单行注释：减少阅读者的记忆负担</li>
+<li>不要用类似val/value/result/temp/count/str这种无意义变量名</li>
+<li>正确使用惯用语：i,j,k,n,e</li>
+<li>生命周期比较短的变量，命名也相对要短：长命名的潜台词是“这是值得注意的变量，需要被记住”</li>
+<li>合理使用一次性变量：并列式长代码需要拆分，嵌套式短代码需要合并<br>驼峰命名法相比于下划线，占地小，紧凑性更好，有些时候区分类和变量时，类用大写驼峰，变量用小写驼峰。但也有自己的缺点，比如HTTP，ID这种缩写词，而且在查找变量的时候必须加上大小写通配。</li>
+</ul>
+<p>还有一些技巧；</p>
+<ul>
+<li>变量、类用名词，方法和函数用动词</li>
+<li>控件命名保留匈牙利命名法，如button-btn, label-lbl等</li>
+<li>对容易用错的变量（比如指针和对象、全局变量），可以保留匈牙利命名法：</li>
+</ul>
+<ol>
+<li>指针加p：避免-&gt;和.用错</li>
+<li>全局变量加g_, 静态变量加s_：这些都是容易出bug的</li>
+<li>成员变量加m_：避免和外部变量重叠<br>总地来说，变量命名需要考虑阅读效率、阅读无歧义、写作效率、写作无歧义、搜索效率、规避潜在风险、规则的简化等，是需要语言学与心理学还有编程经验三者深度融合后才能进行改进的。这次的工程也会采用这些规则来规范编写。</li>
+</ol>
+<h3 id="引擎与顶层逻辑的交互：回调、封装"><a href="#引擎与顶层逻辑的交互：回调、封装" class="headerlink" title="引擎与顶层逻辑的交互：回调、封装"></a>引擎与顶层逻辑的交互：回调、封装</h3><p>对于一个节点来说，加入节点树后，引擎会自动在某些时刻调用方法：初始化，添加进场景时，删除时。对于一些节点，需要每帧进行检测，那么就需要自定义回调函数，并且向引擎“注册”。有时引擎接受到外部输入时，需要将其反馈给节点，那么节点需要事先指定一个回调函数用于接收。</p>
+<p>将外部输入和渲染看作一极，顶层逻辑看作另一极，那么游戏引擎就是连接两极的纽带，为了进行有效的沟通，诞生了消息传递和update等机制。</p>
+<h3 id="内存泄漏与日志统计"><a href="#内存泄漏与日志统计" class="headerlink" title="内存泄漏与日志统计"></a>内存泄漏与日志统计</h3><p>内存泄漏指的是：在堆中创建对象后，没有在结束前进行回收。这个问题非常隐蔽：</p>
+<blockquote>
+<p>…他在维护这份代码的过程中，向其中添加了一些错误判断，如果发生错误，返回什么…但他在添加代码时，所有的返回语句都忘记把这块内存删掉了</p>
+<p>任何一个系统的维护都是长效性的，内存泄漏也是。一种解决方法就是，将构造函数与析构函数的执行次数输出到日志中，这样程序结束后统计日志，就可以发现潜在问题了。</p>
+</blockquote>
+<h3 id="C-11的lambda表达式"><a href="#C-11的lambda表达式" class="headerlink" title="C++11的lambda表达式"></a>C++11的lambda表达式</h3><p>当我们需要在函数内部临时建立一个函数处理一些灵活的工作时，可以构建一个lambda函数：</p>
+<blockquote>
+<p>std::function&lt;return type()&gt; func1 = [capture list] (params list) mutable exception-&gt; return type { function body }</p>
+</blockquote>
+<p>lambda函数func1像变量一样被创建出来，被储存为std::function类型。capture list规定了func1能够利用的外部变量（范围是func1被创建时所能操作的变量），然后params list规定了调用func1时额外传入的参数，mutable修饰符表示函数可以改变捕获的变量（临时改变供自己使用？），exception抛出异常（允许函数体内部用throw()抛出异常）</p>
+<p>但是需要注意，lambda的capture list中的变量是在<strong>创建时就定下来的</strong>，如果是引用捕获&amp;，捕获的是一个引用，func1创建后的修改会有影响，而如果是值捕获=，就只有当时的值，此时对捕获变量的修改都是没有意义的。</p>
+<h3 id="template与可变参数模版"><a href="#template与可变参数模版" class="headerlink" title="template与可变参数模版"></a>template与可变参数模版</h3><p>这篇文章介绍了模版的应用：<a href="https://blog.csdn.net/lianhunqianr1/article/details/79966911" target="_blank" rel="noopener">https://blog.csdn.net/lianhunqianr1/article/details/79966911</a></p>
+<blockquote>
+<p>C++标准委员会采用一套类似函数式语言的语法来设计C++模板，而且设计成图灵完备 (Turing-complete)（详见参考），我们可以把C++模板看成是一种新的语言，而且可以看成是函数式编程语言，只是设计依附在(借助于）C++其他基础语法上（类和函数）。</p>
+</blockquote>
+<p>模版有其复杂的使用方法，但是这里只记录它的思想。首先是“简化”思想，运用模版编程后，不需要对每个类型单独设计一套规则，这就将相似的东西合并起来，大大简化了代码量。第二点是“灵活”，有时候程序员不知道也不需要知道一个类的确切形象，只要知道可供操作的一部分就行了，这时候只有用模版才能开发出具有普适功能的算法和容器。第三点是“动态生成代码”，模版的工作是在编译期和运行期进行的，一些典型场景中（比如用if进行类型判断），一部分花销可以从运行期迁移到编译期，这样就减小了运行开销。</p>
+<p>模版是泛型的基础，泛型中一个思想就是<strong>“Substitution failure is not an error”</strong>，意思是对类型的适配有多次尝试，编译器会自动推导可行的方案（比如对不同参数的函数调用，自行适配合适的参数），然而一次尝试的失败并不是程序错误，只有所有尝试失败才是错误。也就是说，编写者需要设计出任何情况下至少有一种方案能够被执行的代码。自然，智能化的代码需要更加更加智能化的编写者。</p>
+<p>可变参数模版的关键在于参数调用，这里的思想是<strong>匹配调用</strong>或者<strong>递归调用</strong>，后者是前者的延伸。匹配调用也就是：既然不知道参数长度，那么就准备多个函数，逐一匹配合适的函数即可。而递归调用将承接可变长参数的函数func1与解析的函数func2合二为一，将参数列表设为前n个固定参数与最后的可变参数，然后递归调用自身，这样就逐一解出所有参数，但是注意取值为n时，需要准备n-1个函数用来处理递归最后的“余数”，这一点是模版元编程需要考虑“全体情况”的表现。</p>
+<h3 id="变量的四个属性：数值、类型、const、右值（C-11）"><a href="#变量的四个属性：数值、类型、const、右值（C-11）" class="headerlink" title="变量的四个属性：数值、类型、const、右值（C++11）"></a>变量的四个属性：数值、类型、const、右值（C++11）</h3><blockquote>
+<p>通过是否可取地址操作符，以及是否有名字，可以判断是否为右值。右值是指表达式结束后就不存在的临时对象。</p>
+</blockquote>
+<p>在模版变成时，当然需要处理右值的函数，然而在模版的嵌套、转发中，右值可能变成左值（也就是本来赋值完就销毁的变量却拥有了自己的地址和名字）。这时用C++11提供的引用<code>T&amp;&amp;</code>就可以同时保留变量的四个属性，做到“完美转发”</p>
+<h3 id="虚函数与多态特性"><a href="#虚函数与多态特性" class="headerlink" title="虚函数与多态特性"></a>虚函数与多态特性</h3><p>这里参考这篇文章：<a href="https://blog.csdn.net/hackbuteer1/article/details/7558868" target="_blank" rel="noopener">虚函数与纯虚函数的区别</a></p>
+<p>虚函数蕴含的思想是<strong>多态</strong>，整个代码的执行情况对于编译器来说并不是单一的（虽然从结果上，它只能是唯一的，但编译器不需要知道整个情况）。因此，虚函数调用不取决于类型，而取决于实际初始化的类型，就如下面的代码：</p>
+<pre><code class="hljs plain">int main(void)
+&#123;
+    A *a &#x3D; new B();
+    a-&gt;foo();   &#x2F;&#x2F; 在这里，a虽然是指向A的指针，但是被调用的函数(foo)却是B的!
+    return 0;
+&#125;</code></pre>
+
+<p>但是，基类定义了虚函数，子类才能继承并重载，这时候我们依然可以用基类生成一个对象，而这样的对象是不合理的：基类本该是抽象的东西，却可以被实例化。因此，纯虚函数<code>virtual void funtion1()=0</code>，规定了其必须被重写，而且这样的基类不可以被继承。</p>
+<p>可以看出，虚函数和纯虚函数的引入是将现实中的抽象和具象关系体现在代码上，让代码更加安全，同时把“抽象”作为内嵌在语言的特性推广为所有开发者的共识，降低代码理解难度。</p>
+<h3 id="节点继承与回调方法：Cocos2dx引擎与顶层的交互接口"><a href="#节点继承与回调方法：Cocos2dx引擎与顶层的交互接口" class="headerlink" title="节点继承与回调方法：Cocos2dx引擎与顶层的交互接口"></a>节点继承与回调方法：Cocos2dx引擎与顶层的交互接口</h3><p>在处理游戏内容的可拓展性上，cocos2d采用的思想是<strong>继承和回调</strong>，通过对节点类Node的继承，实现游戏内容的多样性和统一性。而事先规定好特定的回调函数，在约定的时刻由引擎调用，就实现了游戏逻辑的可拓展性。</p>
+<p>回调函数：</p>
+<ul>
+<li>init初始化节点时调用</li>
+<li>onEnter被添加进场景中调用（这里是二次初始化）</li>
+<li>onExit节点从场景删除</li>
+<li>update与时间相关，比如每一帧的逻辑、定时逻辑<br>可以认为继承是引擎为内容维度提供的接口，回调是引擎为逻辑维度提供的接口，游戏顶层设计在这两个维度上与引擎进行交互。</li>
+</ul>
+<h3 id="内存池设计"><a href="#内存池设计" class="headerlink" title="内存池设计"></a>内存池设计</h3><p>内存池的思想是将大大小小的内存申请需求统一，以此来<strong>用额外的内存空间为代价换取低频的内存扩展请求</strong>。这是由于技术的发展，使得内存不再需要节约使用，而更需要低频使用。</p>
+<p>内存池的基本功能：</p>
+<ul>
+<li>接管原本代码中的new和delete/free功能，先申请一大块内存空间，再自行决定分配。同时释放的时候也可以暂时不delete，减少频率</li>
+<li>内存池本身申请内存时，做到连续，低频，且尽量占用少（这三者其实是互相矛盾的）</li>
+<li>内存空闲太多时，需要释放一部分内存。<br>PS：这一部分就实现了自主选题中的内存管理需求</li>
+</ul>
+<h3 id="cocos2d-x运行机制解释"><a href="#cocos2d-x运行机制解释" class="headerlink" title="cocos2d-x运行机制解释"></a>cocos2d-x运行机制解释</h3><p><strong>与windows系统关联的启动机制</strong></p>
+<ol>
+<li><code>_tWinMain</code> 作为入口，初始化实例AppDelegate</li>
+<li>调用Application::getInstance()-&gt;run(); 回调applicationDidFinishLaunching，完成制作者自定的初始化</li>
+<li>windows下的OpenGL进行底层交互处理（键盘，窗口最小化等），GLFW直接与Director等进行信息传递</li>
+</ol>
+<p><strong>引擎内部的运行机制</strong></p>
+<ol>
+<li><p>全局初始化：AppDelegate中的applicationDidFinishLaunching，可添加开发者自己的初始化代码</p>
+</li>
+<li><p>进入DisplayLinkDirector的mainloop（），其中的drawScene()对每一帧进行场景渲染和逻辑执行：</p>
+</li>
+<li><p>执行schedule的update进行逻辑更新：schedule作为调度器驱动action更新，并且执行每一帧的游戏逻辑和关于时间的逻辑</p>
+</li>
+<li><p>Director直接控制游戏的暂停、恢复、结束、场景切换（但判断逻辑并不在这里）</p>
+</li>
+<li><p>场景渲染</p>
+<h3 id="消息、逻辑、调度交互"><a href="#消息、逻辑、调度交互" class="headerlink" title="消息、逻辑、调度交互"></a>消息、逻辑、调度交互</h3></li>
+</ol>
+<p><strong>消息的观察者模式：包括注册、触发、处理、注销四个步骤</strong></p>
+<hr>
+<p>这里首先介绍一些C++11的bind机制：</p>
+<pre><code class="hljs plain">
+void TestFunc(int a, char c, float f);
+
+auto bindFunc1 &#x3D; bind(TestFunc, std::placeholders::_1, &#39;A&#39;, 100.1);
+bindFunc1(10);</code></pre>
+
+<p>bindFunc1将一个3个参数的函数变成1个参数，2个“定量”的函数，bind第一个参数对应目标函数，后面的placeholder就对应使用时需要传入的东西。需要注意的是，预先设定的参数都是按值传递的。</p>
+<hr>
+<p>这里来总结观察者模式：</p>
+<p><code>auto listener = EventListenerKeyboard::create();</code>：创建监听器，申请得到一个实例</p>
+<p><code>listener-&gt;onKeyPressed = CC_CALLBACK_2(HelloWorld::fighterMoveCallback, this);</code>：指定监听器的哪个事件会触发哪个实例的哪个成员函数，本质上是对listener的成员指针指定要一个bind()，这里的this指当前场景的实例</p>
+<p><code>_eventDispatcher-&gt;addEventListenerWithSceneGraphPriority(listener, this);</code>：向Director注册（_eventDispatcher其实是封装了向Director相关函数），监听器本身是绑定在节点（这里是Scene）上的，而监听器本身也拥有一个指向回调函数的指针。</p>
+<p>触发由引擎和底层负责，这里只需要实现HelloWorld::fighterMoveCallback方法即可。</p>
+<p><strong>调度器：Schedule</strong></p>
+<p>Scheduler是一个全局调度器，可以从Director中获取指向它的指针，调度的本质就是<strong>在规定的时间由引擎调用某个实例的成员函数</strong>，所以需要3个元素：指向调度器的指针，指向实例的指针，实例的成员函数。</p>
+<p>一般来说，调度器的指针是很容易获得的，实例的指针用this即可实现，所以调度一般定义在该实例对应的类中。</p>
+<p>回调按类型分为update回调（每一帧执行的回调），对象回调和函数回调，脚本回调，执行回调。对象回调其实也是调用函数，只不过这个函数是事先约定的形式：</p>
+<p><code>typedef void (CCObject::*SEL_SCHEDULE)(float)</code>：这里规定了一种类型叫SEL_SCHEDULE，它被定义成一个指针，指向一个CCObject类或派生类的成员函数，而这个成员函数的参数必须是float，返回类型必须是void。</p>
+<p>调度器注册时机：</p>
+<ul>
+<li>Node回调函数中，如onEnter或onExit，会在下一帧开始计时</li>
+<li>单击回调，会在当前帧立刻计时</li>
+<li>计时回调内嵌套回调：难以控制时间<h3 id="cocos2d-x顶层逻辑设计"><a href="#cocos2d-x顶层逻辑设计" class="headerlink" title="cocos2d-x顶层逻辑设计"></a>cocos2d-x顶层逻辑设计</h3></li>
+</ul>
+<p>今天终于是把书差不多啃完了……以现在的预期来看，UI界面只能靠手画，同时分辨率固定，这些暂时没法解决。其他的主要在顶层规划，这也是相当考验能力的环节。</p>
+<p>从内容上来看的话，我将游戏设计拆分成以scene为主的“内容切片”</p>
+<ul>
+<li>scene内加载要考虑耦合度，可能会复用的加载模式不可以在单个scene做</li>
+<li>游戏UI独立于画面，设置继承Node的UINode，游戏UI不写在场景加载里，以便重复调用</li>
+<li>各scene间进行解耦，每个继承的scene间的数据传输用约定的方法进行通信，尽量将数据传输大的scene进行整合</li>
+<li>游戏逻辑去中心化，但是约定用tag进行全局的自由通信，游戏与固定的非组件部分存储指针通信</li>
+<li>对于动态产生的节点，不存储指针，每次访问时调用方法获取实时数据。</li>
+<li>对于复杂的逻辑控制，抽象出一个逻辑节点来做。<h3 id="debug-类之间的互相包含"><a href="#debug-类之间的互相包含" class="headerlink" title="debug:类之间的互相包含"></a>debug:类之间的互相包含</h3></li>
+</ul>
+<p>今天debug的时候遇到了这个问题，两个类的定义互相包含，这时候要用前置申明，而且不能写继承关系。</p>
+<h3 id="关卡设计中的序列模式与难度设置"><a href="#关卡设计中的序列模式与难度设置" class="headerlink" title="关卡设计中的序列模式与难度设置"></a>关卡设计中的序列模式与难度设置</h3><p>首先要解决两个问题：在阶段BOSS和最终BOSS被击落前不能开启下一个阶段；每个阶段是一条时间轴，这里我想设计成既可以从外部读取又可以自动生成的机制。</p>
+<p>一般来说玩游戏是为了有爽快感，随着玩家自身操作水平和装备的提升，固定的游戏难度难以让玩家得到充分的满足。因此，游戏难度应该参考玩家飞机的DPS（这决定了是否能理论上通关）、玩家历史战绩（这体现了玩家的水平）、时间难度（这让游戏更加丰富，也带有一些随机性）、关卡难度系数（让游戏从前到后难度有变化）。</p>
+<h3 id="碰撞判定机制的设计"><a href="#碰撞判定机制的设计" class="headerlink" title="碰撞判定机制的设计"></a>碰撞判定机制的设计</h3><p>碰撞判定也是这个游戏的一大难点：全像素化碰撞太耗性能，直接用boundingBox碰撞又不能避免透明像素的干扰。那么在解决碰撞问题时，我的方案是用一个根据booundingbox自动伸缩的“细长”区域判定。</p>
+<p>2D游戏有设计的优势：绝大多数情况子弹都要穿过敌机的横截面，而穿过纵截面的情况极少发生，这是因为敌机的速度一般都垂直于横截面方向。所以这样就极大方便了碰撞判定。同时对于不同类型的问题，我搭建了scene到各元素的双向通信机制，理论上这个机制可以用动态类型转换+Node-&gt;name进行区分，但这种操作有运行风险不说，性能消耗也比较大。我采用的方式是scene持有多个vector，各节点在加载时分别向scene注册自身的指针到指定vector中，各节点退出时也向scene注册销毁自身的指针，然后每一帧调用scene的碰撞判定，分组进行判定，减小内存消耗。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/cocos2d/">cocos2d</a>
+                    
+                      <a class="hover-with-bg" href="/tags/C/">C++</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/24/%E3%80%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%91Pragmatic_Programmer_%E6%9C%AD%E8%AE%B0/">
+                        <span class="hidden-mobile">【读书笔记】Pragmatic_Programmer_札记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

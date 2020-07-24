@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>【读书笔记】Pragmatic_Programmer_札记 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                【读书笔记】Pragmatic_Programmer_札记
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-07-24 19:24">
+                    2020年7月24日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    10k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    116
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="【读书笔记】Pragmatic-Programmer-札记"><a href="#【读书笔记】Pragmatic-Programmer-札记" class="headerlink" title="【读书笔记】Pragmatic Programmer 札记"></a>【读书笔记】Pragmatic Programmer 札记</h1><h3 id="前言和概要"><a href="#前言和概要" class="headerlink" title="前言和概要"></a>前言和概要</h3><p>这本书是在七月份读的, 有差不多300页, 考虑到英文书算是比较容易理解, 应该一两周能读完.(PS: 实际从10号读到16号)</p>
+<p>重点处会用黑体标注. 主要还是根据书中一些精华的句子写感想.</p>
+<blockquote>
+<p>Your background stems from an understanding of the basic principles of computer science, and your experience comes from a wide range of practical projects.</p>
+</blockquote>
+<p>这是一个关于学习编程知识的建议, 有最基础的计算机知识, 然后在不同领域积累许多经验. 所以语言没什么限制, 思想才是有价值的东西.</p>
+<blockquote>
+<p>There are other factors that can contribute to software rot, and we’ll touch on some of them elsewhere, but neglect accelerates the rot faster than any other factor.</p>
+</blockquote>
+<p>软件工程中的”熵增理论”或”破窗理论”, 书中建议将<strong>及时重构, 修复那些不好的设计</strong>放在第一位, 如果实在没有时间, 也要将其标注起来, 构建以一个围栏, 阻止一块不好的代码继续扩散. 这个建议是基于软件开发中的混乱度提出的, 软件在开发过程中, 总是不可避免地走向混乱, <strong>软件开发的过程也就是与混乱抗争的过程</strong>, 那么尽量保护自己的代码, 让它们简洁高效, 是延续抗争意志的很好的手段.</p>
+<blockquote>
+<p>If you find yourself working on a project with quite a few broken windows, it’s all too easy to slip into the mindset of “All the rest of this code is crap, I’ll just follow suit.”</p>
+</blockquote>
+<p>这个是破窗理论的延伸, <strong>一块不好的代码不仅会让开发者更易于添加糟糕的代码, 还会让开发者认为其他代码也是不好的.</strong>, 我注意到的是这种情形<strong>不仅适用于代码, 还适用于开发计划/开发文档等</strong>, 第一天进行开发的时候应当设计一个简洁的框架, 然后每隔一段时间适量地作出计划, 保证整体的准确性和指导功能. 计划不能太过详细, 不然后续修改需求时就会被看作一块”破窗”, 计划也不能太抽象或者没有, 不然过几天去看当时写的代码的时候就会觉得是写出来的东西难以阅读, 也找不到定位. 总之好的设计一定是精简又可扩展的, 使得每一天都能及时踏在开发的进度上, 而不至于迷失方向或疲于修改计划.</p>
+<blockquote>
+<p>Once you’ve got it, show people, and let them marvel. Then say “of course, it would be better if we added….”</p>
+<p>People find it easier to join an ongoing success.</p>
+</blockquote>
+<p>不仅是对团队而言, 对独立开发者也是这样. <strong>让一个项目时时刻刻处于即将成功的状态, 会让它更加有吸引力</strong>, 最初的开发要做的是写出一个最精简的可行的框架, 给人眼前一亮的感觉, 然后依照这个最初的创意不断的添加功能. 对独立开发者来说, 也就是时时刻刻让项目富有吸引力, 从而让自己能坚持开发下去.</p>
+<blockquote>
+<p>If you give your users something to play with early, their feedback will often lead you to a better eventual solution</p>
+</blockquote>
+<p>这也是迭代开发的好处, 能够迅速地将开发工作转换成可见的成果</p>
+<h3 id="Duplication-重复"><a href="#Duplication-重复" class="headerlink" title="Duplication 重复"></a>Duplication 重复</h3><blockquote>
+<p>The alternative is to have the same thing expressed in two or more places. If you change one, you have to remember to change the others, or, like the alien computers, your program will be brought to its knees by a contradiction. It isn’t a question of whether you’ll remember:<strong>it’s a question of when you’ll forget</strong>.</p>
+<p>The DRY principle tells us to keep the <strong>low-level</strong> knowledge in the code, where it belongs, and reserve the comments for other, <strong>high-level</strong> explanations. Otherwise, we’re duplicating knowledge, and every change means changing both the code and the comments.</p>
+</blockquote>
+<p>这是第一个重要的概念: <strong>在任何地方都尽量不要出现重复的知识</strong></p>
+<p>我在过去的经验里也有这种现象: 在许多地方写上一些相似的代码, 但是修改的时候又忘记修改其他地方的东西, 或者修改了代码却没有修改注释. 现在来看看文章中给的解决方法:</p>
+<ol>
+<li><p>用code generator在每一次更改的时候同步代码. 这也可以使用于代码和文档之间(doxygen), 其核心理念就是<strong>在更改时同步</strong>. 用到的技术有metadata/preprocessor等</p>
+<blockquote>
+<p>To ensure that the tests accurately reflected the specification, the team generated them programmatically from the document itself.</p>
+</blockquote>
+</li>
+<li><p>在注释中用<strong>更高级的逻辑概括代码的内容</strong>, 通常是代码的目的或作用, 这样在更改代码的时候也就不会需要同时修改注释了</p>
+</li>
+<li><p>为了避免头文件和实现中的注释重复, 在头文件中存放<strong>与接口相关的信息</strong>, 而在实现中写一些<strong>被封装起来的但是很重要的细节</strong></p>
+<blockquote>
+<p>Use the header files to document interface issues, and the implementation files to document the nitty-gritty details that users of your code don’t need to know.</p>
+</blockquote>
+</li>
+<li><p>避免违背事实的抽象关系和重复的抽象关系.</p>
+</li>
+</ol>
+<p>这一点书中给了一个实例: 一个运送路线包含卡车, 司机, 和路线, 而卡车中又包含号码牌, 司机和卡车类型. 而当司机生病需要替换时, 问题就来了: 有两个重复的司机. 另外, 卡车其实并不包含司机, 如果一定要包含的话, 那么这个卡车是正在运送货物的卡车. 而不是普通意义的卡车. <strong>在设计抽象的时候时常会出现重复或是违背事实的抽象关系, 从而让实际设计的类不是我们想要的类</strong>, 解决这个问题, 当然是尽量避免重复, 我想到的, 在设计时应该这样询问自己:</p>
+<ul>
+<li>我是否能从这个类中的某几个类成员直接得到另一个类成员? (避免相互包含的重复)</li>
+<li>在这个类需要应用的情况中, 这个类是否都包含它的成员属性?是否有没考虑到的成员属性? (避免违反事实的包含关系)</li>
+<li>在这个类需要应用的情况中, 类成员的是否满足所需的性质? 如可修改性, 唯一性, 可比较性(浮点数带来的精度问题), )可独立存在性(指针指向的独立内存空间)</li>
+<li>在这个类需要应用的情况中, 类成员是否具有不能具备的性质? 如可访问性(public的滥用), 可修改性(const), 过大的取值范围(约束限制)等</li>
+</ul>
+<ol>
+<li>尽量用访问函数获取类的属性<blockquote>
+<p>Where possible, always use accessor functions to read and write the attributes of objects</p>
+<p>有两个例子, 一个是文中给的: 一个line类有两个成员start和end, 当需要获取长度时, 为了不违背重复性的规则, 要用两个点计算这一长度, 但是这一计算通常是昂贵的, 于是设置一个distance, 在获取长度时, 先看起点和终点是否修改过了, 如果修改了就更新distance, 再传出.</p>
+</blockquote>
+</li>
+</ol>
+<p>另一个例子是getInstance()的作用, 用来得到静态指针指向的实例, 也是唯一的实例. 这两个例子都说明<strong>用访问函数存取属性可以做更多逻辑上的封装, 让类的设计更加合理</strong></p>
+<ol>
+<li>设计良好的可重复利用的生态环境<blockquote>
+<p>What you’re trying to do is foster an environment where it’s easier to find and reuse existing stuff than to write it yourself.</p>
+</blockquote>
+</li>
+</ol>
+<p>这其实有分成两点: 对个人而言和对软件/语言生态而言.</p>
+<p><strong>对个人而言, 尽量提高代码的可重复利用性</strong>, 这不仅是提高效率, 也是集中修改. 例如用一个utils类统一管理各种需要用到的静态方法, 或者用宏定义将多个数值定义统一.</p>
+<p><strong>对生态环境而言, 简化调包方法, 降低调包风险.</strong></p>
+<p>这是我结合语言更新来思考的, C++的调包并没有像python那么方便, 往往是直接copy别人的代码, 还要手动搜索接口说明. 复杂的复用方法让整个软件生态面临重复性的风险, 这直接带来<strong>性能不确定的第三方库</strong>, 然后导致开发者趋向于自己造轮子, 又带来了<strong>开发的复杂度上升和沟通成本的增加</strong>, 论坛的活跃度降低, 对新手而言也很不友好. 这些都会导致整个语言生态环境的没落.</p>
+<h3 id="Orthogonality-正交性-解耦合"><a href="#Orthogonality-正交性-解耦合" class="headerlink" title="Orthogonality 正交性/解耦合"></a>Orthogonality 正交性/解耦合</h3><blockquote>
+<p>You get two major benefits if you write orthogonal systems: increased productivity and reduced risk.</p>
+</blockquote>
+<p>正交性也就是解耦合, 书中总结了一些好处, 这里列出比较有新意的点:</p>
+<ol>
+<li>将问题局限化: 一个结构出问题以后整个错误只会在这个结构内, 这样就可以减少思考范围, 提高debug速度</li>
+<li>避免对第三方库的依赖: 与第三方库解耦后, 只要接口合适, 可以任意更换成另一个库, 减少依赖性.<blockquote>
+<p>Every change needs a meeting of the entire team, because any one of them might be affected</p>
+</blockquote>
+</li>
+</ol>
+<p>这是一个很有趣的点, <strong>对一个团队的解耦可以减小沟通成本</strong>, 也就是管理的时候, 将整个程序拆解成细分的几个子部件, 然后指名各个小团队制作, 这样确保每个级别只有较少的人参与研发, 沟通也富有效率, 然后部件与部件之间正交化, 一个团队的延误不影响其他团队的工作.</p>
+<p>满足正交性以后, <strong>用模块化和层次化的思想构建一个系统</strong></p>
+<img src="/2020/07/24/%E3%80%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%91Pragmatic_Programmer_%E6%9C%AD%E8%AE%B0/056f9a574fe47828a21074cf7e239d0d.png" srcset="/img/loading.gif" class="">
+<p>如图, 交互界面内部是模块化的, 而交互界面和数据库之间是层次化的. 层次化的东西下部只需向上提供接口, 同时模块化的东西, 各模块直接也只需提供接口. 这就保证了整个系统是可靠高效的.</p>
+<blockquote>
+<p><strong>Don’t rely on the properties of things you can’t control.</strong></p>
+</blockquote>
+<p>这一句话的例子是: 不要用电话号码去分辨每一个客户. 同样, 也不能用地区/姓名等区分每一个客户, 虽然在客户数量少的情况下这样做很有效. 但是最本质的是区分<strong>一个抽象的类和从属于类的成员的区别</strong>, 前者的独立性不可由后者的独立性保障, 也比如说, 一个对象的同一性判断不可以用内存中的位置来决定, 这是因为这个位置是对象的一个属性, 虽然这个位置对于一个对象是唯一的, 但很多情况下, 开发者所要的唯一性是脱离于对象生命周期的, 那么在这种时候就应该用别的方法去识别唯一性.</p>
+<blockquote>
+<p>If an object persistence scheme is transparent, then it’s orthogonal. If it requires you to create or access objects in a special way, then it’s not. Keeping such details isolated from your code has the added benefit of making it easier to change vendors in the future.</p>
+</blockquote>
+<p><strong>引入第三方库通常是增强耦合度的</strong>, 例如stl库, 从database到GUI都要调用其中的方法, 那么一旦修改其中的某个定义, 就一定会波及多个层. 在此基础上, 要么对引入的库谨慎判断, 要么自己封装一层接口, 不直接在代码中使用第三方库, 而是集中在接口使用.</p>
+<p>对第三方库的可替代性也有判断标准, 就如这句话所说的, 如果第三方库的使用比较奇特, 那么就尽量不要引入. 最好的第三方库是transparent的</p>
+<blockquote>
+<p>With AOP, you implement logging orthogonally to the things being logged. Using the Java version of AOP, you could write a log message when entering any method of class Fred by coding the aspect:</p>
+</blockquote>
+<p>这下面是一个例子, 意思是说AOP让log不是由每个方法独自发出的, 而是在每个方法被调用时统一发出的, 这就避免了重复调用log, 而且AOP在你编写的时候就自然而然地适用, 不需要去对源代码进行任何改动.</p>
+<p>以后在开发的时候, 可以用一个基类实现这些功能,</p>
+<blockquote>
+<p>In fact, we suggest that every module have its own unit test built into its code, and that these tests be performed automatically as part of the regular build process</p>
+</blockquote>
+<p>这是一个关于<strong>自动化测试</strong>的建议, 也就是每个组件自身有内部的测试, 组件自身包括功能和测试两部分, 一方面可以很方便地进行调用, 另一方面减小耦合度, 节省了编译的时间.</p>
+<blockquote>
+<p>With truly orthogonal documentation, you should be able to change the appearance dramatically without changing the content. Modern word processors provide style sheets and macros that help</p>
+</blockquote>
+<p><strong>文档的解耦</strong>, 也就是自动编写目录, 将格式与内容分离, 以及格式的统一控制等等.</p>
+<h3 id="Reversibility-可逆性"><a href="#Reversibility-可逆性" class="headerlink" title="Reversibility 可逆性"></a>Reversibility 可逆性</h3><blockquote>
+<p>If you keep decisions soft and pliable, it won’t be hard at all. If you have poor encapsulation, high coupling, and hard-coded logic or parameters in the code, it might be impossible.</p>
+</blockquote>
+<p>可逆性指<strong>面对未来需求的不确定性时, 如何编写出易于改动的软件系统</strong>, 书中提到的观点有两个:</p>
+<ol>
+<li>系统上, 为可能的改动预留空间</li>
+<li>利用接口, 将第三方库封装在接口里面<br>注重系统的可逆性当然是有必要的, 可我觉得这里只提了这个趋势但是没有提到如何权衡: 假设第三方库要更换, 那么就要封装一层接口; 假设系统要更换, 就要设计可更改的模式. 可逆性越大的软件也越臃肿, 这样毫无疑问会降低开发效率. 那如何保持简洁又兼顾可逆性? 这里思考的应当不是哪些需求可能会改动, 而是哪些需求不会改动.</li>
+</ol>
+<p><strong>在确定的需求基础上, 编写出最独立,最小化的软件</strong></p>
+<p>所以在刚开始的时候, 应当尽量确定一些不会改变的东西, 比如软件的功能, 软件使用的平台, 是否依赖网络, 软件的最大性能需求等等. 确定以后再思考可能会改动的部分, 比如软件的GUI界面, 软件的额外功能等. 在编写的时候应当尽量不包含会改动的部分, 比如尽量不引入第三方库(除非确定这个库拥有满足需求的性能), 对长期维护的项目, 要考虑第三方库的维护状态. 也要考虑代码的易读性.</p>
+<h3 id="Tracer-Bullets-技术验证与原型构建"><a href="#Tracer-Bullets-技术验证与原型构建" class="headerlink" title="Tracer Bullets: 技术验证与原型构建"></a>Tracer Bullets: 技术验证与原型构建</h3><p>书中的tracer bullets来源于曳光弹的形象比喻, 它是一个用来验证技术是否可行的原型机, 并且这个原型机成为后续大规模开发的骨架, 其他功能陆续被添加到这个原型机上, 逐步改装, 最终完成.</p>
+<p>与tracer bullets对应的conventional alternative是一次性集成, 或者是单向地设计-实现-集成这个模式. 单向化有两个弊端, 第一是<strong>在测试前无法得知技术的有效性, 风险大</strong>, 这也是我之前碰见的一个问题. 我在设计动态星球生成器的时候, 没有考虑到放大后的模糊效果和性能损耗, 最终开发出的东西无法运用在实际场景中. 另外一个弊端是<strong>模块化开发, 一次性集成的方法缺少实时激励, 无论是对开发者还是用户</strong>. 激励在软件开发中很有必要, 越复杂的系统越需要心理上拉出”战线”.</p>
+<blockquote>
+<p>A small body of code has low inertia—it is easy and quick to change.</p>
+</blockquote>
+<p>这是tracer bullets的另一个好处: <strong>技术验证的代码体量小, 易于修改</strong>.</p>
+<blockquote>
+<p>Prototyping generates disposable code. Tracer code is lean but complete, and forms part of the skeleton of the final system.</p>
+</blockquote>
+<p>这里强调了Tracer bullets和prototype的区别, 前者是一个<strong>完整的骨架加上小部分的实现</strong>, 后者是一个不完整的骨架加上完全的实现, tracer bullets是可以保留到最后的, 而且这个骨架就是实际应用的东西, 而不是一个供参考的原型机. 这样能确保tracer bullets工作在实际的情况中, 而且避免了最开始的重构工作.</p>
+<blockquote>
+<p>What sorts of things might you choose to investigate with a prototype? Anything that carries risk. Anything that hasn’t been tried before, or that is absolutely critical to the final system. Anything unproven, experimental, or doubtful. Anything you aren’t comfortable with.</p>
+</blockquote>
+<p>这里需要注意的是<strong>每一次尝试新事物的时候都最好做原型验证</strong>, 这样能有效避免风险. 在开发的时候无论时间是否充裕, 都应该采用最有效的开发方式, 在这种开发中技术失败的风险也会被考虑进去.</p>
+<blockquote>
+<p>It’s easy to become misled by the apparent completeness of a demonstrated prototype, and project sponsors or management may insist on deploying the prototype (or its progeny) if you don’t set the right expectations.</p>
+</blockquote>
+<p>prototype注意的是<strong>验证某个技术是否可行, 只需要一部分代码是正确的</strong>, 而tracer bullets不同, 它需要<strong>写出能完整运行的最小的正确代码, 不需要完整, 但是需要正确和能运行</strong>, 这就导致prototype必然被推翻重来.</p>
+<blockquote>
+<p>By coding at a higher level of abstraction, you are free to concentrate on solving domain problems, and can ignore petty implementation details.</p>
+</blockquote>
+<p>这是说<strong>在最初的时候不要考虑语言的具体细节, 只需要用一种伪代码描述出业务逻辑即可</strong>, 确实在思考问题的时候我默认都会从语言的角度思考可行性, 但是这是不对的, 因为理清业务逻辑不需要理清语言细节, 一个逻辑可以有很多实现, 而我在构建框架的时候并不需要去寻找最合适的实现, 甚至不需要关注是否能实现, 这些东西都是在实现的过程中考虑的.</p>
+<blockquote>
+<p>But with a mini-launguage, you would instead be able to issue an error message using the vocabulary of the domain.</p>
+</blockquote>
+<p>这也是站在业务逻辑思考的好处, 一些错误提示是基于语言或计算机系统本身的, 但这种提示是脱离<strong>业务语言</strong>的, 在业务语言中, 仅有业务本身的选择, 而将所有语法错误和执行错误都重新阐释为业务逻辑的错误.</p>
+<blockquote>
+<p>Given that most applications exceed their expected lifetimes, you’re probably better off biting the bullet and adopting the more complex and readable language up front</p>
+</blockquote>
+<p>软件是无生命的, 但是在使用的时候依然要考虑它的<strong>生命周期</strong>, 我的思考是, 在代码能够被理解的时候, 它是有活力的, 而当没有人能理解一段代码的时候, 代码就失去了活力, 而失去活力的代码会失去其价值.</p>
+<p>开发和管理存在一个平衡: 富有活力的代码通常难以创造, 而管理没有活力的代码也非常困难. 所以这取决于这段代码的生命周期有多长: 生命周期为一天或几天的代码, 不需要开发文档, 只需要内部的注释. 而生命周期为半个月到一个月的代码, 需要开发文档, 但不需要对第三方库的维护. 而生命周期为一年到几年的代码, 则需要编写完善的开发文档, 并且尽量对第三方库封装接口, 从而让第三方库可以根据维护性更换.</p>
+<p>生命周期应该看作代码本身的一个属性.</p>
+<blockquote>
+<p>We find that often the only way to determine the timetable for a project is by gaining experience on that same project.</p>
+</blockquote>
+<p>依据最开始的决定对整个项目的时间作规定是很不可靠的, 预估一个程序的开发时间最好的方法就是直接取开发这个程序. <strong>在开发过程中逐步确定剩余的时间, 并依照这个时间作决策</strong></p>
+<p>也就是说, 整个开发计划是随着开发进程而变化的.</p>
+<h3 id="ToolBox拥有自己的工具箱"><a href="#ToolBox拥有自己的工具箱" class="headerlink" title="ToolBox拥有自己的工具箱"></a>ToolBox拥有自己的工具箱</h3><blockquote>
+<p>Many new programmers make the mistake of adopting a single power tool, such as a particular integrated development environment (IDE), and never leave its cozy interface.</p>
+</blockquote>
+<p><strong>每一种工具都有自身的优缺点, 没有哪个是完美的</strong>, 这也说明开发者应当掌握不同的工具来处理不同的情况, 用自身的经验加上合理调度来达成最优效率.</p>
+<p>当然, 在一个开发进程中使用过多的工具也代表着很难被别人理解.</p>
+<blockquote>
+<p>As Pragmatic Programmers, our base material isn’t wood or iron, it’s knowledge.</p>
+</blockquote>
+<p>这一句话只是单纯看着很有哲学意味…</p>
+<p><strong>Plain text</strong></p>
+<p>可以翻译作”朴素的文本形式”, 书中对平面文本比较推崇, 它的优点是可以被人理解, <strong>对于一些在使用时需要被理解的东西, 通常以文本的形式保存</strong></p>
+<p>但也有缺点, plain text占空间大, 同时在读取和写入的时候比较昂贵. 一些其他的缺点其实并不是plain text的锅, 例如易读性. 二进制的东西读取并不困难, 同时plain text也可以通过加密形式存储.</p>
+<p><strong>Using Unix Tools Under Windows</strong></p>
+<blockquote>
+<p>But if you do all your work using GUIs, you are missing out on the full capabilities of your environment. You won’t be able to automate common tasks, or use the full power of the tools available to you. And you won’t be able to combine your tools to create customized macro tools.</p>
+</blockquote>
+<p>确实GUI在自动化处理上有些问题, 但是我觉得并不需要强行在GUI和命令行之间作划分, 有时候<strong>简单的操作由GUI完成, 自动化的东西交给命令行</strong>, 这样应该能保持效率的最大化?</p>
+<p><strong>Use a single editor well</strong></p>
+<p>最好选择一个编辑器来熟悉, 然后充分利用它的快捷键提高效率.</p>
+<p>好的编辑器有以下特征:</p>
+<ol>
+<li>可配置, 可以自行配置让编辑器符合自己的喜好</li>
+<li>可拓展, 可以添加新的内容</li>
+<li>可编程, 可以自己设计复杂的组合操作</li>
+</ol>
+<p><strong>Always Use Source Code Control</strong></p>
+<blockquote>
+<p>There is a tremendous hidden benefit in having an entire project under the umbrella of a source code control system: you can have product builds that are automatic and repeatable.</p>
+</blockquote>
+<p>书中的观点是: 源代码管理不仅可以适用于代码, 更适用于任何自己编写的东西, 比如脚本, 管理文档等. 这样可以随时退回到之前的操作, 非常方便.</p>
+<p>所以对于任何可以被管理的文件, 尽量把他们应用在源代码管理中</p>
+<h3 id="Debugging-调试"><a href="#Debugging-调试" class="headerlink" title="Debugging 调试"></a>Debugging 调试</h3><p>书中总结了几条调试的规则, 这里简要列出:</p>
+<ol>
+<li>bug复现</li>
+<li>数据可视化</li>
+<li>程序运行追踪</li>
+<li>先假设自己的代码有问题, 再思考第三方代码是否有问题</li>
+<li>不要假设哪些代码是必定正确运行的, 而是去证明它</li>
+<li>在找到代码之后, 反思如何避免它<h3 id="Text-Manipulation-文本操作"><a href="#Text-Manipulation-文本操作" class="headerlink" title="Text Manipulation 文本操作"></a>Text Manipulation 文本操作</h3></li>
+</ol>
+<p>文本操作的一些功能:(以Perl为例)</p>
+<ol>
+<li>建立数据库</li>
+<li>自动方法生成</li>
+<li>测试数据生成</li>
+<li>抽取声明和接口</li>
+<li>生成文档<blockquote>
+<p>Write Code That Writes Code.</p>
+</blockquote>
+</li>
+</ol>
+<p>这句话解释了自动处理的重要性. 建立一个代码生成器是很有必要的, 这里是一些功能:</p>
+<ol>
+<li>创建新的文件, 并应用模版</li>
+<li>执行自动的格式转换操作</li>
+<li>执行预处理操作</li>
+<li>执行给定的同步操作或一致性检查</li>
+<li>手动处理一些源代码中的可变片段(结构体等)<h3 id="Pragmatic-Paranoia-偏执心理"><a href="#Pragmatic-Paranoia-偏执心理" class="headerlink" title="Pragmatic Paranoia 偏执心理"></a>Pragmatic Paranoia 偏执心理</h3></li>
+</ol>
+<blockquote>
+<p>You Can’t Write Perfect Software</p>
+</blockquote>
+<p>这句话也是我感触比较深的, 在写程序的时候当然要追求效率, 但是不要追求完美. 因为完美的程序一般都会花费远远大于预定的时间来开发, 在绝大多数时候我只需要一个简单够用的程序.</p>
+<p><strong>Design by Contract</strong></p>
+<p>这是确保程序在正确性和完美之间的找到平衡的一个方法, 简单来说, 就是在给定条件下, 一个方法能确保结果中的一部分被正确呈现, 而一些模糊的部分会怎么样, 并没有被规定.</p>
+<p>DBC包含三个部分: 调用者必定凑齐的条件, 依照条件返回结果的方法, 和检查条件与结果是否正确的class</p>
+<blockquote>
+<p>Subclasses must be usable through the base class interface without the need for the user to know the difference.</p>
+</blockquote>
+<p>这是继承的一个原则: <strong>继承类必须在调用基类接口的时候表现得和基类一样</strong>, 不然继承的原则就会被破坏, 这里的表现得一样不是指一样的输出, 而是输入范围至少要和基类的范围一样. 也就是说在用户使用继承类的基类接口的时候, 用户可以当做基类来使用而不会产生错误.</p>
+<p>DBC在C++中有预处理器来保证, 如<strong>Nana</strong>, 在JAVA中有<strong>iContrast</strong></p>
+<blockquote>
+<p>With enough components and agents that can negotiate their own contracts among themselves to achieve a goal, we might just solve the software productivity crisis by letting software solve it for us.</p>
+</blockquote>
+<p>有时候面对输入不一样的情况, 并不总是将其当作<strong>错误</strong>, 而对于特殊情况, 依然能返回正确的结果, 那么程序本身在扩展的时候就自动地找出复杂范围的可行方案(例如类型推断)</p>
+<p><strong>crash earlier</strong></p>
+<blockquote>
+<p>when your code discovers that something that was supposed to be impossible just happened, your program is no longer viable.</p>
+</blockquote>
+<p><strong>在程序最开始出错的地方停止</strong>, 一方面是避免后续的报错影响debug思路, 另一方面是避免重要的数据被错误地覆盖.</p>
+<p>另外, 为了尽早检测出错误, 在每一个模块都应当设置<strong>检测运行状态合理性的代码</strong>, 也是为以后的debug留下线索</p>
+<blockquote>
+<p>If It Can’t Happen, Use Assertions to Ensure That It Won’t</p>
+</blockquote>
+<p>很多时候在编程中会默认加上一些条件, 然后根据这些假设编程, 但是<strong>对正确性的检测不能因为主观的假设而偏颇</strong>, 此时使用Assertion来显式表达自己的假设.</p>
+<p>但是要注意, 断言中不能存放任何业务逻辑的代码, 因为断言可能在编译时被关闭.</p>
+<blockquote>
+<p>First, they assume that testing finds all the bugs. Second, the optimists are forgetting that your program runs in a dangerous world.</p>
+</blockquote>
+<p>这是<strong>Assertion不仅用于debug</strong>的原因, 因为断言针对的是所有潜在bug和不正确的输入</p>
+<blockquote>
+<p>For example, if your code tries to open a file for reading and that file does not exist, should an exception be raised?</p>
+</blockquote>
+<p>这就涉及到exception的意义: <strong>exception用在处理设计者意想不到的状况, 不能参与正常的业务逻辑处理</strong></p>
+<p>同时, 大量的异常处理会打乱整个代码的逻辑, 我们在debug的时候用exception<strong>只需要知道大概的范围, 但不需要精确到每一步</strong>,因此抛出异常的也只是一个try块, 最好不要是每一行代码都检测.</p>
+<p>以我之前的经验, 在捕获异常的时候, 最好直接用<strong>方法+功能来定位</strong>, 这样设计者既可以直接找到出错的地方, 也可以知道运行的宏观逻辑.</p>
+<blockquote>
+<p>An error handler is a routine that is called when an error is detected.</p>
+</blockquote>
+<p>可以设计一个专门用来处理异常信息的接口, 便于异常的管理和查找</p>
+<blockquote>
+<p>Finish What You Start</p>
+</blockquote>
+<p>尽量在同一个方法内完成打开和关闭操作, 否则很容易出现多次打开或不正确的打开时机等问题</p>
+<p>也可以利用语言内部的对称性, 将资源的打开关闭放在构造和析构函数里. <strong>用一个类实例作为资源的抽象</strong>, 同样的, 这种方式也能避免在throw exception的时候没有释放资源, 因为资源会随着C++的特性自动释放</p>
+<p><strong>deallocate structure</strong></p>
+<p>书中给了三种方式:</p>
+<ol>
+<li>父结构自行负责子结构资源的分配和释放</li>
+<li>父结构不管子结构, 每个结构独立管理资源的分配和释放</li>
+<li>如果父结构还有子结构的资源, 则拒绝释放.(外部管理)<h3 id="flexible-适应性强的代码"><a href="#flexible-适应性强的代码" class="headerlink" title="flexible 适应性强的代码"></a>flexible 适应性强的代码</h3></li>
+</ol>
+<blockquote>
+<p>A good way to stay flexible is to write less code.</p>
+</blockquote>
+<p>这个建议很简单, 只要不写代码, 就能降低代码的修改难度. <strong>保持代码的简洁性也是增强适应性的一个方式</strong></p>
+<blockquote>
+<p>Rather than digging though a hierarchy yourself, just ask for what you need directly.</p>
+</blockquote>
+<p>在一个类中对另一个类的接口调用<strong>尽量只调用浅层的方法</strong>, 因为如果一连串地调用, 就减少了封装的程度, 增加了耦合度.</p>
+<p><strong>The Law of Demeter for Functions</strong></p>
+<p>任何方法只能调用:</p>
+<ol>
+<li>自身的方法</li>
+<li>传入参数的方法</li>
+<li>方法定义域中生成的实例的方法.<blockquote>
+<p>First, we want to make our systems highly configurable. Not just things such as screen colors and prompt text, but deeply ingrained items such as the choice of algorithms, database products, middleware technology, and user-interface style.</p>
+</blockquote>
+</li>
+</ol>
+<p>从<strong>外部定制</strong>来说, 可定制的远远不止用户的flavor, 更包含开发者的可选项. <strong>用文件来定制被每次都修改源代码更加优美</strong></p>
+<p>可定制的有很多, 比如运行路径, 用户界面, 平台等.</p>
+<blockquote>
+<p>Our goal is to think declaratively (specifying what is to be done, not how) and create highly dynamic and adaptable programs. We do this by adopting a general rule: program for the general case, and put the specifics somewhere else—outside the compiled code base.</p>
+</blockquote>
+<p>这一段写的非常出乎我意料. *<em>我们写出的程序是一次性编译的, 那么就不应该存在特定的目的. *</em></p>
+<p>最理想的状态是用metadata描述程序的功能, 然后整个程序是一个引擎, 对描述进行解析, 并按照预想的方式运行. 这样, 程序的功能部分用人类语言描述出来, 保留了大部分业务逻辑的信息. 然后引擎本身也是高度解耦的, 可以较大程度覆盖可能的业务逻辑.</p>
+<p>在工作场景里, 写一个程序不仅要覆盖给定的需求, 更要在拓展潜在需求上尽量做到健壮, 灵活. 这种写程序的目标是整个可能性的组合, 而不是一个单一的目的.</p>
+<h3 id="workflow-用户的操作空间"><a href="#workflow-用户的操作空间" class="headerlink" title="workflow 用户的操作空间"></a>workflow 用户的操作空间</h3><blockquote>
+<p>It can be eye-opening to see where the dependencies really exist.</p>
+</blockquote>
+<p>workflow用在这种地方: 用户可以执行不同的操作, 但是一些操作需要在另一些操作执行完以后才能执行. 那么如何设计程序? 这就是<strong>用图形表达出用户可能的所有操作, 即一个操作空间</strong></p>
+<p>基于操作空间, 可以设计前端的结构:</p>
+<blockquote>
+<p>In a hungry consumer model, you replace the central scheduler with a number of independent consumer tasks and a centralized work queue.</p>
+</blockquote>
+<p>序列化, 也就是将用户的操作拆分成<strong>去中心化的动作, 然后放在中心化的序列中</strong>, 这种设置比用很多flag表示要有效得多.</p>
+<p>同时, 可以将多个序列进行拆分重组, 进而达到多线程的目的. 上述的workflow检测依赖性, 然后将满足解耦条件的动作从序列中抽出. 也可以合并多个序列, 只要检测能否互相并存即可. 这种情况下, <strong>所有的依赖性都可以通过检测序列来实现</strong></p>
+<h3 id="concurrency-同时性"><a href="#concurrency-同时性" class="headerlink" title="concurrency 同时性"></a>concurrency 同时性</h3><blockquote>
+<p>Because things can now happen at the “same time,” you may suddenly see some time-based dependencies.</p>
+</blockquote>
+<p>多线程并不是”麻烦”的技术, 相反, 多线程给代码设置更高的要求, 让一些低劣的代码不能正常运行, 这促使开发者提高编程水平.</p>
+<h3 id="Publish-Subscribe消息机制"><a href="#Publish-Subscribe消息机制" class="headerlink" title="Publish/Subscribe消息机制"></a>Publish/Subscribe消息机制</h3><blockquote>
+<p>Objects should be able to register to receive only the events they need, and should never be sent events they don’t need.</p>
+</blockquote>
+<p>这个消息通知机制就是cocos2d里用到的机制: <strong>接受者向发送者注册, 然后发送者每回发送的时候, 都向注册了的组件发出通知</strong></p>
+<p>这里我有一些启发: 对于可以通信的东西, 它们交流代码媒介是什么呢? 既然消息是去中心化的, 那么交流一定要有一个共同语言. 而<strong>共同的基类就是组件间交流的语言</strong>, 当组件都有相同的基类的时候, 组件间的交流就可以基于这个语言, 当然也只能限于这个语言.</p>
+<h3 id="MVC设计模式"><a href="#MVC设计模式" class="headerlink" title="MVC设计模式"></a>MVC设计模式</h3><p><a href="https://baike.baidu.com/item/MVC%E6%A1%86%E6%9E%B6/9241230?fromtitle=MVC%E6%A8%A1%E5%BC%8F&fromid=713147&fr=aladdin" target="_blank" rel="noopener">MVC设计模式</a></p>
+<blockquote>
+<p>separating the model from both the GUI that represents it and the controls that manage the view</p>
+</blockquote>
+<p>这是MVC的设计思想:<strong>数据被封装成一个model, 读取和写入都是单向的</strong>,</p>
+<p>MVC的设计思想不仅用在GUI的设计中, 只要是涉及数据+交互的, 都可以用MVC进行解耦.</p>
+<h3 id="Blackboard-匿名论坛设计模式"><a href="#Blackboard-匿名论坛设计模式" class="headerlink" title="Blackboard 匿名论坛设计模式"></a>Blackboard 匿名论坛设计模式</h3><blockquote>
+<p>A blackboard system lets us decouple our objects from each other completely, providing a forum where knowledge consumers and producers can exchange data anonymously and asynchronously.</p>
+</blockquote>
+<p>黑板设计模式的意义在于<strong>黑板本身仅是一个容器, 而业务逻辑被分散到各个组件中去</strong>, 这是去中心化的. 去中心化有它的好处, 对于非常复杂的规则, 如果编写一个中心化的东西(可以参考桌游的gm), 那么对所有情况进行组合是非常困难的. 但是现实中很多逻辑本身就是去中心化的, 比如人与人的交流活动, 而将去中心化的东西用程序实现, 就涉及到一个”论坛”, 论坛中的讨论者是去中心化的, 但是论坛本身是中心化的, 这样就可以做到组件的充分解耦.</p>
+<p>我也想把这个模式叫做<strong>匿名论坛模式</strong></p>
+<h3 id="Programming-by-Coincidence"><a href="#Programming-by-Coincidence" class="headerlink" title="Programming by Coincidence"></a>Programming by Coincidence</h3><blockquote>
+<p>As developers, we also work in minefields.</p>
+</blockquote>
+<p>要避免coding中的一些潜在问题, 我摘选了几点比较好的建议:</p>
+<ol>
+<li>在运用新技术时一定要先作技术验证, 避免产生歧义.</li>
+<li>不要依赖潜在的东西, 比如语言, 平台, 和测试的特定接口</li>
+<li>在测试的时候, 不仅确保结果正确, 也确保过程和预想的一样.</li>
+<li>不要为了兼容而兼容, 在适当的时候就要果断进行重构<h3 id="optimizing-性能优化"><a href="#optimizing-性能优化" class="headerlink" title="optimizing 性能优化"></a>optimizing 性能优化</h3></li>
+</ol>
+<p>这部分还是关于时间复杂度的, 但是程序整体的性能瓶颈并不一定是算法, 也可能是读写速度, 存储空间等</p>
+<h3 id="refactor-重构"><a href="#refactor-重构" class="headerlink" title="refactor 重构"></a>refactor 重构</h3><p>四个重构的场景:</p>
+<ol>
+<li>代码有重复性(DRY)</li>
+<li>代码耦合度高</li>
+<li>代码中应用的assumption过于陈旧</li>
+<li>有性能瓶颈<blockquote>
+<p>Don’t try to refactor and add functionality at the same time.</p>
+</blockquote>
+</li>
+</ol>
+<p>重构的理念是<strong>小步重构, 大量测试</strong>, 也就是不要在重构的时候无意间改变了原先的业务逻辑.</p>
+<h3 id="test-测试"><a href="#test-测试" class="headerlink" title="test 测试"></a>test 测试</h3><blockquote>
+<p>In C++ you can achieve the same effect (at compile time) by using #ifdef to compile unit test code selectively.</p>
+</blockquote>
+<p>之前有提到说每一个模块都应该带有对自身的测试代码, 那么这些测试代码就可以放在宏定义里面. 当然, <strong>测试的逻辑一定要和业务逻辑的代码解耦</strong></p>
+<blockquote>
+<p>A test harness can handle common operations such as logging status, analyzing output for expected results, and selecting and running the tests.</p>
+</blockquote>
+<p>我认为每个系统的测试都是不一样的, 很难做到同一个测试系统用于不同的代码, 但是在log中对error和warning由专门的分类比直接用string写字符串要好很多.</p>
+<p>我认为一个良好的log应该是包含<strong>可视化, 分级, 折叠, 自动保存信息</strong>等功能, 用不同的颜色输出error和warning, 然后每次输出后都保存到文档中, 以便下次调试时比较. 对于比较复杂的系统, 将次要的输出信息折叠起来, 只保留主要部分.</p>
+<p>但与其对一段不良的代码做许多测试, 还不如<strong>尽量编写没有bug的代码</strong>,通过改良编程习惯, 加深对底层的理解,做到防患于未然</p>
+<blockquote>
+<p>The wizard code is not factored out behind a tidy interface—it is interwoven line by line with functionality that Joe writes.</p>
+</blockquote>
+<p>这里的wizard指的是自动代码生成器, 就像自动类框架生成这种东西. 但是使用的条件是开发者必须完全熟悉wizard生成的代码, 因为这些代码是全面地和开发者的代码混合的.</p>
+<h3 id="The-Requirements-Pit-充分理解需求"><a href="#The-Requirements-Pit-充分理解需求" class="headerlink" title="The Requirements Pit 充分理解需求"></a>The Requirements Pit 充分理解需求</h3><blockquote>
+<p>Requirements rarely lie on the surface. Normally, they’re buried deep beneath layers of assumptions, misconceptions, and politics.</p>
+</blockquote>
+<p>寻找<strong>真正的需求</strong>确实是比较困难的, 有时候难以想象完全整个交互场景, 有时候没有真正拆解需求的组合, 导致设计的框架过于复杂.</p>
+<blockquote>
+<p>It’s important to discover the underlying reason why users do a particular thing, rather than just the way they currently do it.</p>
+</blockquote>
+<p>真正的需求可能连用户自己都不清楚, 因为<strong>一个单一的需求无法决定整个程序框架, 可能的需求和潜在的变动一同组成的需求域才能决定程序哪方面需要flexible</strong></p>
+<p>另一个了解需求的方法是: 假设自己是用户. 也就是站在用户的角度思考自己计划的设计是否足够强大, 且足够方便.</p>
+<blockquote>
+<p>Don’t be a slave to any notation; use whatever method best communicates the requirements with your audience.</p>
+</blockquote>
+<p>在理解并记录需求的时候需要的是最符合业务逻辑的语言, <strong>业务逻辑的语言并不局限于任何一种图表或记号</strong></p>
+<h3 id="Maintain-a-Glossary-制作术语表"><a href="#Maintain-a-Glossary-制作术语表" class="headerlink" title="Maintain a Glossary 制作术语表"></a>Maintain a Glossary 制作术语表</h3><p>这也是一个<strong>标准化</strong>的东西, 对文档中的描述给定一个准确的定义, 当然这主要用在大型项目中. 从共同的语言中特异化一些东西来描述业务逻辑, 可以说是一种”业务语言”</p>
+<h3 id="while-in-coding"><a href="#while-in-coding" class="headerlink" title="while in coding"></a>while in coding</h3><p>这一节实际上是之前的小节的汇总, 包含一些我觉得很有用的观点.</p>
+<ol>
+<li>在开始项目之前做技术验证和原型建模</li>
+<li>在开始项目之前先扫除直觉上的担忧</li>
+<li>不要写太多太详细的技术文档, 要拥有较强的灵活性<blockquote>
+<p>Often, it is only during coding that certain options become apparent.</p>
+</blockquote>
+</li>
+</ol>
+<p>我也有类似的经验, 写着写着才发现有的地方可以用很巧妙的方式实现, 或者以另一个方式拓展. 但是否要遵循这种方向? 我觉得应该要看这个拓展性是不是符合项目需求或潜在需求的.</p>
+<blockquote>
+<p>Never underestimate the cost of adopting new tools and methods.</p>
+</blockquote>
+<p>这是建议不要在正式项目中<strong>过多使用不熟悉的技术</strong>, 同样地, 框架设计应该在满足需求的同时尽可能简洁, 而不是在没有必要的地方留下拓展接口.</p>
+<blockquote>
+<p>Test Early. Test Often. Test Automatically.</p>
+</blockquote>
+<p>在集成化测试前作单元测试是很有必要的, 因为越是复杂的不可靠系统越难找到真正的bug, 最好在每次build时都自动地进行测试</p>
+<h3 id="comments-注释"><a href="#comments-注释" class="headerlink" title="comments 注释"></a>comments 注释</h3><blockquote>
+<p>In general, comments should discuss why something is done, its purpose and its goal.</p>
+</blockquote>
+<p>注释是另一个维度的东西, 注释补全了代码中人的意图和业务逻辑, <strong>注释和代码是互补的, 是高层次的逻辑抽象, 而不是代码的翻译</strong></p>
+<p>与doxygen相反地, 可以把<strong>设计文档的一部分通过自动生成器同步到代码注释中去</strong>, 也可以将代码注释和技术文档各自独立, 并单向集成到API Reference中</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>读完真是身心俱疲…</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">编程思想</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/24/%E3%80%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%91%E7%B2%BE%E9%80%9ACocos2d-x%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91(%E5%9F%BA%E7%A1%80%E5%8D%B7)%EF%BC%9A%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E6%9C%AD%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【读书笔记】精通Cocos2d-x游戏开发(基础卷)：程序设计思想札记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/24/%E7%A8%8B%E8%AE%BE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">程设开发总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

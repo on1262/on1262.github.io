@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>程设开发总结 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                程设开发总结
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-07-24 19:24">
+                    2020年7月24日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    2.5k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    25
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="2020年7月程设开发总结"><a href="#2020年7月程设开发总结" class="headerlink" title="2020年7月程设开发总结"></a>2020年7月程设开发总结</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>今年6月上旬到七月初的这二十多天大概是我人生中第一次写一个3K-5K量级的项目, 从第一天对游戏引擎完全不了解, 到自己用一下午去设计一个UI界面, 甚至去分析飞船的结构特点, 最终用稍微超过预期的时间完成了一个勉强满意的”模具”, 虽然离理想中的游戏差距很多, 但是提供了一个可以完善的平台, 让我有信心继续做下去. 中间着实有不少困难, 甚至让最初企划时的兴奋感都消散殆尽, 但是能做出一个能代表自己风格的作品, 确实是一件有意义的事, 甚至可以说没有什么比自我实现这种事更有意义了.</p>
+<p>当然, 在这种量级的开发中, 尽管已经提前设想过一些解决方案, 但还是遇到了意料之外的情况. 设计的理念也有待改进. 这篇文章就是总结这些琐碎的东西的.</p>
+<h3 id="健壮性和复杂性-应当考虑不变的是什么-而不是可变的是什么"><a href="#健壮性和复杂性-应当考虑不变的是什么-而不是可变的是什么" class="headerlink" title="健壮性和复杂性: 应当考虑不变的是什么, 而不是可变的是什么."></a>健壮性和复杂性: 应当考虑不变的是什么, 而不是可变的是什么.</h3><p>在写这个游戏的最开始, 我的构想还不是很成熟, 于是最初的目标就是: 尽可能保证底层设计的健壮性, 这样以后再变动设计时就能尽量减小重构次数. 依照这个方案, 前期对底层的处理确实比较模块化, 同时避免了后面的许多问题. 但是这样也使得整个设计非常复杂, 在处理<strong>类的相互包含问题</strong>的时候, 我之前设计的复杂的相互引用机制让debug变得异常困难. 如果舍弃这个机制, 整个底层都要重构, 好在最后尽量避免了相互引用, 然后<strong>把独立的方法集成到一个工具类中</strong>, 这样就确定了一个不循环的结构关系, 当然<strong>如何设计一个自顶而下又可以互相通信的机制</strong>也是我没考虑过的问题. 所以这里我先提出一点想法:</p>
+<p><strong>在设计的时候先考虑哪些需求是不会改变的, 再以此设计一个最精简的系统</strong></p>
+<p>就例如游戏中的各个scene, 整个游戏流程只需要提供一个实例, 那么scene只需要一个静态成员存放instance就可以了, 然后用getInstance()方法, 完全可以避免成员需要拿指针的问题. DataLoader也是, 同一时间只能加载一个存放的内容, 不同存档不需要交换信息, 而且DataLoader的类型也是确定的: 加载游戏配置数据和玩家存档里的数据, 这样就只要设定两个静态成员就可以了.</p>
+<h3 id="对内部细节的封装"><a href="#对内部细节的封装" class="headerlink" title="对内部细节的封装"></a>对内部细节的封装</h3><p>一开始我对飞机的定义很不明确, 武器是否可更换? 飞机是否可更换? 飞机型号是否有特殊技能? 是否有特定的增益? 但在设计的时候应该始终把飞机看作一个”黑箱”, 对战斗scene来说, 只要能获取飞机的位置/血量等数据就可以, 而不需要关注内部的东西, 同样整个level生产的也无外乎飞机/子弹/掉落物/特效等, 设计的时候就设计几个基类供level调用即可.</p>
+<h3 id="代码的可维护性"><a href="#代码的可维护性" class="headerlink" title="代码的可维护性"></a>代码的可维护性</h3><p>写到后面的时候时常会犯一些低级错误: 重载函数写错了参数列表, if语句中==少打了一个=, 还有各种约定的规则没有被遵守. coding的过程也是<strong>不断制定规则的过程</strong>, 但是这些规则在编写的时候制定下来, 又如何保证一定能被遵守呢? <strong>任何程序员自行编写的规则都尽量要做到强制被遵守</strong>, 例如两个函数调用前后的顺序, 就用isLoaded来检测, 在没有遵守的时候抛出异常, 又如Reflection这个类的机制, 这是个反例, 所有的飞机都需要在创建的时候手动向反射表注册, 这样并不符合上面所说的理念. 这个改进的方案还没想好(也许没有?), 但是像这种规则即使不能避免, 也要及时整理在技术文档里.</p>
+<p>save里的数据也缺乏维护性, 这是因为最初的时候对<strong>飞机/子弹的实例和模版概念没有分清</strong>导致的, 按理说save里只能存放实例, 也就是一些具有特异性的东西, 但是<strong>属性本身就是有变和不变两个性质的</strong>, 属性的数量/类别/作用都是不变的, 但属性的数值却是可变的, 所以一个武器的属性表就应该同时存放在gameData和save里, 同时这里实例的概念是什么? 是拥有相同属性, 相同的类模版, 但属性数值可以不同的一些飞船. 一个实例并不代表游戏里的一个飞船, 事实上<strong>实例本身仅有数值特意化的功能, 实际生成的数量是由程序控制的, 每个游戏内实体的区分也仅靠内存地址的不同</strong>, storage里存放的实例都是不同的, 因为给玩家相同参数的东西没有意义, 所以每个物品对应一个实例, 但level里的实例是可复用的, 因为生成的飞机基本都是一样的外观, 方便动态控制生成的数量. 这也限制了按照实例查找个体的范围, 这个范围是不能包括可复用实例的区域的.</p>
+<p>像这种唯一性的确定规则, 应当在设计的时候就想好. 后期更改会带来很大的麻烦</p>
+<h3 id="开发进度的可视化-amp-迭代开发"><a href="#开发进度的可视化-amp-迭代开发" class="headerlink" title="开发进度的可视化&amp;迭代开发"></a>开发进度的可视化&amp;迭代开发</h3><p>整个开发过程最艰难的大概就是做UI和写行星生成器的时候, 这里我的开发流程并不合理, 首先行星生成器我花了3天时间研究, 但是结果上这一个东西因为性能原因不能产生大面积的可动背景, 而这三天里, 我并没有做任何推动开发进度的东西, 导致写完以后一度丧失了进行下去的信心. <strong>对一个独立开发者而言, 如何规定开发计划, 让整个开发进度可视化, 并得到充分的反馈, 是开发能否进行下去的关键</strong>, 在做行星生成器的时候, 我把整个游戏背景设计/UI设计完全押注在这一个技术的实现上, 然而这种是很危险的. 对一个最精简框架所必须的UI, 背景图片而言, 他们虽然要遵循一个统一的视觉形象, 但是不能依赖一个未知能否实现的技术.</p>
+<p>在规划的时候也应该从最精简的框架入手, 先<strong>搭建出一个能用的东西, 再去思考怎样让它变得更好</strong>. 过度追求完美是很危险的, 就像我在写行星生成器的时候, 过度想让它完美呈现, 却因此破坏了整个游戏的开发进程, 也破坏了迭代开发的原则. 以后的设计中要避免各个技术的相互耦合, 对于难度高的技术, 尽量先写一个可用的版本, 再去完善它.</p>
+<h3 id="文档规范化-amp-注释规范化"><a href="#文档规范化-amp-注释规范化" class="headerlink" title="文档规范化&amp;注释规范化"></a>文档规范化&amp;注释规范化</h3><p>这次没有用doxygen生成文档, 虽然写了许多注释, 但回看的时候效果都很差: <strong>太少注释让人无法理解运行原理, 太多注释让人花费大量的时间在浏览无用信息上</strong>, 后期修改一个源文件的时候, 经常在十几个方法里面寻找, 但是在中途就忘记了自己要找什么东西. 同时满足注释的详细程度和检索遍历程度, 听起来是矛盾的, 但其实也有方法: <strong>一些注释是只需要全局检索的, 例如TODO, 那么只要有可检索的关键字就行了</strong>, 而需要让人了解”这个方法是干什么的”这些注释, 不能写得太过琐碎, 最好写出<strong>一整块注释, 大致说明代码的功能, 需要特别注意的地方在所在行添加注释</strong>, 这样就不必在繁多的注释行中不断阅读.</p>
+<p>doxygen也是比较方便的, 但是我还没有关注过注释的可维护性, 在对程序进行修改的时候, 注释很难进行同步修改, 这也是我写大量功能性注释的弊端:<strong>注释太多反而加大了修改的工作量, 也增添了额外的规则</strong>, 而最好是在一段代码通过稳定测试以后再写一个总结性质的注释.</p>
+<h3 id="过程中的奇异bug们与一些零碎经验"><a href="#过程中的奇异bug们与一些零碎经验" class="headerlink" title="过程中的奇异bug们与一些零碎经验"></a>过程中的奇异bug们与一些零碎经验</h3><p>开发过程中也遇上了一些奇怪的bug:</p>
+<ol>
+<li><p>枚举的size{small,medium,large}中的small与cocos2d命名空间的一个宏定义重名(所以<strong>一般在cpp里用using namespace而不要在头文件里用</strong>)</p>
+</li>
+<li><p>设置rotation后再设置anchorPoint总是显示错位, 后来发现是因为旋转后锚点的位置也会在坐标系中改变</p>
+</li>
+<li><p>提示nullptr, 是因为垃圾自动回收机制导致的</p>
+</li>
+<li><p>用removeChildByName的时候, 对参数理解不到位, 导致后来一些奇奇怪怪的报错(以后要多看reference)<br>也有一些零碎的东西需要改进</p>
+</li>
+<li><p>cocos2d::ui这个命名空间太长了, 最好用 <code>namespace vlns = very::long::namespace</code> 削短</p>
+</li>
+<li></li>
+</ol>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E6%B8%B8%E6%88%8F/">游戏</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+                    
+                      <a class="hover-with-bg" href="/tags/cocos2d/">cocos2d</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%80%BB%E7%BB%93/">总结</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/24/%E3%80%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%91Pragmatic_Programmer_%E6%9C%AD%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【读书笔记】Pragmatic_Programmer_札记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/24/2020SummerGame%EF%BC%9A%E7%BE%8E%E5%B7%A5%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">2020SummerGame：美工设计笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
