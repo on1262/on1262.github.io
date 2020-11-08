@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>自平衡小车开发笔记 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                自平衡小车开发笔记
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-07-26 00:00">
+                    2020年7月26日 凌晨
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    3.3k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    34
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="陀螺仪模块"><a href="#陀螺仪模块" class="headerlink" title="陀螺仪模块"></a>陀螺仪模块</h1><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>MPU6050是一个陀螺仪模块，最近在做单片机的时候需要用到姿态估计，但是这个东西内部机理比较复杂，而且搜了一圈没有找到详细的教程，这个笔记包括硬件接口的解读和信号处理，因为做的项目是平衡车，所以会牺牲刷新率和角度范围来尽量提高精度。</p>
+<h3 id="加速度计"><a href="#加速度计" class="headerlink" title="加速度计"></a>加速度计</h3><p>首先要明确加速度计测的是什么：加速度计的等效模型是一个铁球在正方体盒子中达到与正方体保持相对静止时与各个面的压力（规定正方向，一对面的压力就有了符号），这也就是说，铁球加速度时刻等于盒子加速度（不然他俩无法保持相对静止），铁球被封闭在盒子内，接触力只有压力，非接触力有重力、磁力等，但是在实际的加速度计中，是没有铁球的，也就没有磁力。</p>
+<p>那么，可以推出：</p>
+<p><strong>传感器加速度=测量加速度+重力加速度</strong></p>
+<p>这里的三个加速度要转换到同一坐标系</p>
+<img src="/2020/07/26/%E8%87%AA%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/2020-07-26-20-14-32.png" srcset="/img/loading.gif" class="">
+<p>我们需要用测量加速度得到传感器姿态，也就是传感器坐标系到地面坐标系（重力加速度所在坐标系，也是人观察的坐标系）的映射规律，3个已知量解出3个未知量，这就要求传感器加速度已知。这个要求是加速度计自身办不到的，需要借助其他模块。</p>
+<p>但是，平衡车这一例子上，可以借助结构带来的额外条件用加速度额外解出角度。</p>
+<p>当加速度计被绑定在平衡车上时，我们假设在短时间内平衡车车轮制动，那么整个车体相当于一个木杆，加速度只能有一个方向：与杆垂直的方向。我们将传感器的总加速度加上重力加速度，也就得到测量加速度。<strong>这个加速度在Z轴上的投影大小等于重力加速度在Z轴上投影的大小</strong>，用反余弦直接就可以解出角度。</p>
+<p>为此，需要的条件是：短时间内维持车轮制动，在短时间达到近似静止或匀速运动，并对传感器高速采样，得到足够精确的结果。</p>
+<h3 id="角速度计"><a href="#角速度计" class="headerlink" title="角速度计"></a>角速度计</h3><p>在非平衡状态时，加速度计就不可用（其实也可以作核算），这时对角度的计算就用角速度的积分。</p>
+<h1 id="电机控制"><a href="#电机控制" class="headerlink" title="电机控制"></a>电机控制</h1><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>步进电机在调试后暴露出的缺点是：速度太快，加速减速算法太复杂，而且静止状态会过热。改进的方法是选用A4988，并采用16细分模式。利用A4988的最大电流控制，将静止电流设置在0.7A左右，这样基本就不会发热。剩下的技术难点就是pwm调频进行速度控制。</p>
+<h3 id="pwm底层调频"><a href="#pwm底层调频" class="headerlink" title="pwm底层调频"></a>pwm底层调频</h3><p>步进角1.8度，16细分后一圈是3200步。uno主频16MHz, 预除数1，8，64，256，1024，timer1支持计数器到65535, timer2支持到256, 两者最低pwm频率分别是0.23Hz和61Hz。</p>
+<p>轮子直径5cm, 换算成线速度，timer2支持的最小线速度是0.31cm/s，在不改变scale的时候最大线速度是80cm/s左右，完全支持所有使用情景。</p>
+<p>得出公式：c = (5000 * pi * d) / (p *s); 其中c是比较器上限(0-255)，d是轮子半径，p是preScale大小，s是轮子线速度。d和s的长度单位统一，时间单位是秒。默认16细分。</p>
+<p>如果只计算赫兹数的话，c = 16 * 10^6 / (p * f); 其中f是输出频率。</p>
+<p>为了让速度的离散分布尽量均匀，我们预先对不同速度进行分区。先作出不同预除数的可能</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>这里记一下位运算的结果：</p>
+<pre><code class="hljs plain">   &#x2F;&#x2F; turn on CTC mode
+TCCR1B |&#x3D; (1 &lt;&lt; WGM12);
+&#x2F;&#x2F; Set CS10 and CS12 bits for 1024 prescaler
+TCCR1B |&#x3D; (1 &lt;&lt; CS12) | (1 &lt;&lt; CS10);</code></pre>
+<p><code>a &lt;&lt; b</code> 表示a左移b个bit，假设这里WGM12=3,那么右移运算就是1000，而TCCR1B被初始设定为0，或操作以后就直接把WGM12寄存器的值赋为1。所以这里用麻烦的宏定义的原因就是便于直接读出寄存器的值。相应地多个寄存器的操作用或来连接（因为都是0，所以或操作不会覆盖什么东西）</p>
+<p>至于寄存器的值对应pwm的状态，参考芯片的datasheet，注意这里设置的都是fast pwm模式。</p>
+<img src="/2020/07/26/%E8%87%AA%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/2020-08-01-23-03-51.png" srcset="/img/loading.gif" class="">
+<p>因为频率和寄存器中阈值的反比关系，线速度的分布是不均匀的。可以实时对预除数进行调整，从而保证在一个相当大角速度范围内近似均匀的pwm输出</p>
+<h1 id="控制算法"><a href="#控制算法" class="headerlink" title="控制算法"></a>控制算法</h1><p>采用的是PID双环控制：速度环和距离环，前者维持小车平衡，后者维持小车位移不变。开发过程中也有一些问题，这里列举出来：</p>
+<h3 id="控制量的符号关系"><a href="#控制量的符号关系" class="headerlink" title="控制量的符号关系"></a>控制量的符号关系</h3><p>假设角度、加速度、电机速度三者的正方向在初始点是一致的，PID输入、输出、目标点关系已知，那么在小车运用中需要额外改变符号：</p>
+<p>假设小车前倾，角度为正，角度输入速度环，得到负的速度输出：这里的负号指PID算法试图让小车角度回正，那么对应电机速度应该是正向，因此需要加一个负号。</p>
+<p>假设小车前倾，角度为正，速度环输出为正（已修正），电机速度为正，但是小车行驶了一段距离，偏离原点，此时距离环接受速度环的输出为正，距离输出为负，对角度影响为负，不需要变号。</p>
+<h3 id="PID参数解析"><a href="#PID参数解析" class="headerlink" title="PID参数解析"></a>PID参数解析</h3><p>速度环确保小车不会倒下（稳定在某个角度），将车轮速度看作“修正力”，而将角度看作“目标”的话，角度受到重力加速度分量影响，也就是存在一个“阻力”，P参数代表原始的修正力，角度越大，修正力越大。I参数代表抗衡重力加速度分量的一个力，在I参数影响下，小车受到的等效重力减小了许多，落入了能被P参数修正的区间内（如果单纯地调大P参数，会使P的作用力累积导致结果发散）。D参数用角速度控制速度，对角度的周期性震荡进行衰减，但数值太大会造成调控力度不够，收敛时间延长。</p>
+<p>距离环其实输入的是距离微分（速度乘以时间间隔），输出是角度。I参数用距离控制倾斜角度，这当然会将系统引向不稳定状态，I较大的时候距离调整更迅速，但是I依赖于速度环的控制能力，而且I太大会引起周期震荡。考虑到采样的间隔还是比较均匀的，P参数可以看作用速度控制倾斜角度，也就是对周期性震荡进行衰减，但是P太大也会引起周期震荡，这个参数的确定与重力加速度有关。D参数用加速度调整角度，也是让运行更加平稳。</p>
+<p>偏移时，距离信息存储在距离环的I参数中，当小车在另一个位置稳定时，I参数可以引导小车回到原地，因此距离环具有调整距离的作用。</p>
+<h3 id="抗干扰"><a href="#抗干扰" class="headerlink" title="抗干扰"></a>抗干扰</h3><p>角度零漂等效于小车放在斜坡上：速度环的I参数对抗恒定阻力，所以没有问题，仿真中去掉I参数后小车确实以恒定速度向前移动了。</p>
+<h1 id="GUI设计"><a href="#GUI设计" class="headerlink" title="GUI设计"></a>GUI设计</h1><h3 id="bug汇总"><a href="#bug汇总" class="headerlink" title="bug汇总"></a>bug汇总</h3><p>这里记录一些开发过程中遇到的bug，都是比较玄学的东西。</p>
+<blockquote>
+<p>__acrt_first_block == header</p>
+</blockquote>
+<p>这是DLL和exe没有共用一个栈导致的，原因是vs项目设置里没有设置动态链接dll模式（MDd），改过去以后就OK。</p>
+<blockquote>
+<p>esp32上传的代码时好时坏</p>
+</blockquote>
+<p>串口使用前要println，上传时要选no IDE，不能用arduino IDE，也是一个非常玄学的问题。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>硬设算是结束了，但是很多技术细节都没有记下来，留待以后慢慢补充。这里先总结一些需要改进的地方（包括技术、展示、软硬件设计等）</p>
+<h3 id="缺乏合适的测试环境，测试周期过长"><a href="#缺乏合适的测试环境，测试周期过长" class="headerlink" title="缺乏合适的测试环境，测试周期过长"></a>缺乏合适的测试环境，测试周期过长</h3><p>测试环境是一个软硬结合的环境。因为自平衡小车的特殊性，测试过程中需要大量的调试。尽管我已经在设计上对小车的软硬件进行解耦，但是后期出现的转向问题、指令过渡问题等都是需要大量测试来debug的，更不用说PID调参。</p>
+<p>理想情况下，应当有一个尽可能快速的测试周期：</p>
+<ol>
+<li>小车的平衡检测可以只做一次，时间可以缩短；</li>
+<li>完善debug输出指令，可以指定输出内容；</li>
+<li>在小车最大电流和输出功率间找到平衡点，尽量降低耗电；</li>
+<li>寻找一个宽敞的测试环境，事先用水平仪测量保证排除地面平整度因素</li>
+<li>前期基础性测试中对各种异常现象汇总，有意设置异常情况（放置角度不水平、任意时刻外加扰动），避免多层次bug互相影响</li>
+<li>仿真协助测试：先给出原理可行性，再进行实际调参</li>
+<li>每个模块都有单元测试和集成测试，不能同时对几个模块进行测试。</li>
+</ol>
+<h3 id="时间分配不合理，功能展示不够灵活"><a href="#时间分配不合理，功能展示不够灵活" class="headerlink" title="时间分配不合理，功能展示不够灵活"></a>时间分配不合理，功能展示不够灵活</h3><p>这主要是针对展示环节提出的，展示时双方分工没有安排好，启动时间比较长，而且触摸模块鲁棒性太差，好几次启动失败。功能展示的时候没有体现出显著性，没有方便的展示样例，导致图像识别部分也没有对应实例，拿不出可信的东西。出bug的时候也没有优先进行接下来的展示，总体来说，前期缺乏磨合训练，临场发挥不够灵活。</p>
+<h3 id="debug没有遵照原则，浪费了大量时间"><a href="#debug没有遵照原则，浪费了大量时间" class="headerlink" title="debug没有遵照原则，浪费了大量时间"></a>debug没有遵照原则，浪费了大量时间</h3><p>debug的时候思考不够冷静，只想用自己推断来快速找到原因，但很多情况都没有思路，反而在浪费时间。</p>
+<p>另外，一些调试手段过于繁杂，缺乏自动化设计，进而在大量测试时不可避免地引入偶然误差，同时分散了人的精力。</p>
+<p>debug的一些经验：</p>
+<ol>
+<li>发现bug的时候先进行复现，进而确定出错的情景范围。</li>
+<li>屏蔽掉若干无关模块，特别是未测试过的模块</li>
+<li>对可复现的bug逐步排查无关变量，从而确定最核心的出错情景</li>
+<li>添加若干调试输出，缩小排查范围</li>
+<li>找到最核心的出错位置，初步确定几个可能性</li>
+<li>先做出简单的改动，检验思路是否正确</li>
+<li>最后锁定一个思路，设置关键性的调试输出，或者进行一些特定操作来复现</li>
+<li>每一次复现时都尽可能保持测试环境的一致性。</li>
+<li>尽量采用自动化设计。</li>
+</ol>
+<h3 id="代码素养不够好"><a href="#代码素养不够好" class="headerlink" title="代码素养不够好"></a>代码素养不够好</h3><p>这是两方面的：一方面指自身应当写出良好的代码，另一方面指不能让极差的代码进入项目中来。至少应当对其进行最起码的修复。</p>
+<p>GUI编写上，这次比较成功地用MVC思想进行前后端分离，但是也出现了后端单个类过于庞大的问题。在写实时位置显示时，没有想清楚具体的控制和显示关系，导致写出来的东西有很多逻辑自相矛盾的地方。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>软硬结合的作品最核心的瓶颈就是调试，如何在有限次调试中尽量确保作品鲁棒性强，这就要求有高自动化的测试步骤、详细的数据记录、尽量可靠的原理性仿真和一些工程上的冗余。通过引入分层设计的思想，能够快速定位bug的发生位置。统一且可靠的代码风格能够避免很多潜在的bug。</p>
+<p>另外，这次硬设的一个经验是：任何自己没想清楚的环节，到最后都会成为问题。从初创到成品的过程本身就是一个不断细化的过程，任何设想最终都落实在代码上，一些小小的意料外因素最后也会成为一个障碍，因此最好在最开始的时候就追问所有的细节：<strong>这个细节该如何实现？是否具有工程可行性？</strong>，以此来督促自己摆脱空想、面对现实。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A1%AC%E4%BB%B6%E5%BC%80%E5%8F%91/">硬件开发</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/arduino/">arduino</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/10/opencv%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">opencv基础学习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/25/%E3%80%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%91QT5.9C++%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+                        <span class="hidden-mobile">【读书笔记】QT5.9C++开发指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>【算法】单源最短路径dijkstra算法 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                【算法】单源最短路径dijkstra算法
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-11-08 20:22">
+                    2020年11月8日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.5k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    15
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="dijkstra算法以及第七周OJ"><a href="#dijkstra算法以及第七周OJ" class="headerlink" title="dijkstra算法以及第七周OJ"></a>dijkstra算法以及第七周OJ</h1><h2 id="dijkstra算法理解"><a href="#dijkstra算法理解" class="headerlink" title="dijkstra算法理解"></a>dijkstra算法理解</h2><h3 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h3><p>运行一次dijkstra算法只能求出给定点到图中所有点的最短距离以及最短路径。</p>
+<p>假设一个顶点数为n、边数为e的图，需要两张表：第一张表大小为n，<strong>记录给定点到图中所有点的最短路径</strong>，这张表在过程中会不断更新；第二张表是最短路径树SPT，在单源情况下，这个树只是从起点到n个节点的二层带权n叉树，被添加的最短路径都是确定的路径，不会被更改。</p>
+<p>首先更新最短路径表，只将起点的邻接点更新到表中，其余置INF(无穷大)。</p>
+<p>每一步开始时，先考察最短路径表中还没确定的点，也就是SPT以外的点，访问其中最短距离对应的点B，<strong>这个点是不确定点中最短的一条，对所有路径，它们只能从A出发，而表中至少包含A所有的邻接点的路径，任何从A到B的点的路径都至少有一段被包含在表中，也就是任何可能路径都不会比表中最短路径还要短</strong>，我们找的这个B恰好能利用这个信息：全图任何从A到B的可能路径，都不会比表中最短路径（一个从A到B的路径）短，那么表中的最短路径就是全图上的最短路径。</p>
+<p>每一步结束时，总能得到一个B，将这个B添加到SPT中。然后要用B更新最短路径表：因为B已经被加在了SPT中，所以必须添加新的备选最短路径使得最短路径表中总能找到新的最短路径，而这个添加过程就引入了所有与B相关的路径：</p>
+<p>假设其他路径都不是最短路径，那么B更新了邻接点后，必然会更新到最短路径：<strong>这是因为，假设路径表中有一条n+1步的路径，那么它包含的n步的路径必定是最短路径，否则它不会被更新到。当所有与SPT的邻接点都被更新到最短路径表中时，假设一个路径是到达邻接点的最短路径，那么它后退一步的路径必然是最短路径，我们已知这样的路径的所有邻接点都被更新，那么这个路径必然被包含在表中</strong></p>
+<p>每次更新可能更新多个最短路径，但是每次只接收一个。</p>
+<h3 id="优化策略：配对堆"><a href="#优化策略：配对堆" class="headerlink" title="优化策略：配对堆"></a>优化策略：配对堆</h3><p>见堆相关blog</p>
+<p><strong>顶点查找</strong></p>
+<p>利用dijkstra算法运行中不会扩增线性表的特点，构建堆的时候，只改变每个节点的指针，不改变节点存储的位置。也就是依然可以用下标搜索到特定node，然后搜索到其邻接表.虽然node不存储自身位置，但是可以取地址相减获得序号</p>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p><strong>时间复杂度</strong></p>
+<p>因为每次SPT只增加一个点，所以必定要迭代n次，每次迭代的耗时分析：</p>
+<ol>
+<li>要找到路径表中除了SPT以外的点的最短路径</li>
+<li>将其添加到SPT中，并更新路径表中邻接节点的路径<br>如果我们用配对堆维护最小路径，每次取出堆顶是O(logn)的耗时，但每次更新路径是O(1)的操作，所以总耗时是O(nlogn + e)<br>对于稀疏图，用邻接表存储，查找邻接节点就是O(1)，总共需要O(e)次，不影响复杂度</li>
+</ol>
+<p><strong>空间复杂度</strong></p>
+<p>SPT需要空间为n，建堆空间为n，最短路径表的空间为n（单源）</p>
+<h2 id="OJ分析"><a href="#OJ分析" class="headerlink" title="OJ分析"></a>OJ分析</h2><p>OJ的问题主要在于：找所有最小路径数和空白区域划分。</p>
+<h3 id="路径记录"><a href="#路径记录" class="headerlink" title="路径记录"></a>路径记录</h3><p><strong>根据最短路径的各个子路径也一定是最短路径</strong>的原理，只需要记录每个点到A点的最短路径的前一个点即可，在更新路径的时候，如果待更新路径与原路径相等，那么就同时记录两个点，所需空间复杂度就是邻接表的复杂度，即O(e)</p>
+<h3 id="零权重分布"><a href="#零权重分布" class="headerlink" title="零权重分布"></a>零权重分布</h3><p>一个思路：例如给定10个置0权重，就构建10层的图，每层图都一样，但是层之间的路径是单向的：<strong>第一层的A节点用有向的0权重连接到第二层的A的邻接点</strong>，也就是说，算法可以选择在第一层到达终点，也可以选择通过0权重到达第二层，但是每次上升就无法下降，<strong>将二维图扩展到3维，就覆盖了所有可能的置0路线</strong></p>
+<p>但是也有不严谨的地方：如果路径长度比置0数还要短，最短路径就是0，此时这个长度就没有用上。</p>
+<h3 id="零权重复杂度分析"><a href="#零权重复杂度分析" class="headerlink" title="零权重复杂度分析"></a>零权重复杂度分析</h3><p>将倍数代入复杂度，log(aN)被线性化，而ae也是线性增长的，因此整个时间复杂度增长速度近似线性增长。</p>
+<p>因为每层图都是一样的，0权重连接也可以通过邻接表查询到，所以权重存储空间与a无关。最短路径表和SPT会增长到aN，在第一次检测后，将最短距离减去最大权重依然大于当前最短距离的点看作不存在，当需要检测A层时，只需要存储可能经过的点的位置。</p>
+<p>也可以同时以起点和终点进行2次最短路径检测，然后对每一条边进行比对，就可以得到经过某条边到达终点的路径长度，如果大于最小路径减去最大权重的a倍，就删掉该条边（一定不会经过这条边），然后再删除孤立点</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/08/%E9%A9%AC%E6%81%A9%E9%80%89%E9%9B%86%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A4%BE%E4%BC%9A%E4%B8%BB%E4%B9%89%E4%BB%8E%E7%A9%BA%E6%83%B3%E5%88%B0%E7%A7%91%E5%AD%A6%E7%9A%84%E5%8F%91%E5%B1%95/">
+                        <span class="hidden-mobile">马恩选集笔记：社会主义从空想到科学的发展</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

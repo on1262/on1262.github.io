@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>opencv基础学习 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                opencv基础学习
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-08-10 00:00">
+                    2020年8月10日 凌晨
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.1k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    12
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="opencv基础学习笔记"><a href="#opencv基础学习笔记" class="headerlink" title="opencv基础学习笔记"></a>opencv基础学习笔记</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在硬设开发的期间需要用到图像识别的功能，于是安装了opencv试图利用现成的库来实现。虽然只是调库，但是基本的概念还是得弄清楚，否则在其之上的修改就没法做了。这篇笔记主要记录opencv的基础概念，参照的是官方的tutorial，做的是一个总结式的笔记。和之前的笔记一样，也是重思想不重细节。</p>
+<h3 id="Mat-图像的C-类抽象"><a href="#Mat-图像的C-类抽象" class="headerlink" title="Mat 图像的C++类抽象"></a>Mat 图像的C++类抽象</h3><p>mat组成就是一个代表灰度的矩阵+header,其中header存储矩阵大小、内存位置等信息。但是图像抽象并非如此简单：mat考虑到了内存管理问题，引入了counting system，并且对cv程序中的常用场景（图像传递）进行优化，减少大量复制带来的性能损耗。</p>
+<p><strong>counting system</strong></p>
+<p>多处引用带来一个问题：谁来释放这片内存？在reference counting mechanism的机制下，<strong>当程序中没有任何指针指向这片内存时，就代表它可以被释放了</strong>，没有指针指向内存，代表程序在这个时候是看不见这片内存的，也就无法利用其中的信息。reference counting并非要记录最后剩下的是“哪个”引用，因为哪一个都是无所谓的。这就像游乐园进场的数数一样，每进去一个就数一个数，在数到满员的时候让下一个游客等待下一轮再进去。</p>
+<p><strong>color space</strong></p>
+<p>不同色域的区别有两个：储存在矩阵中数值的范围和各层间的呈色方式。影响矩阵的只有前者，但是这也代表指定mat的时候就要指定颜色的分解方式。</p>
+<p>另外，mat也提供了对图像的一个部分引用，或者是对图像中的颜色进行整体替换的功能。</p>
+<h3 id="Feature-Matching-图像特征匹配"><a href="#Feature-Matching-图像特征匹配" class="headerlink" title="Feature Matching 图像特征匹配"></a>Feature Matching 图像特征匹配</h3><p>突然跳到这里是因为目前需要先理解这部分的内容。</p>
+<p><strong>Matcher</strong></p>
+<p>特征匹配简单地来说，就是选取图像的一部分计算出一个“特征”，这个特征进入到特定的数学空间中，此空间可以具有抗旋转、抗缩放、抗亮度变化等特性，也就是说这些变换并不会使同一个特征偏离太远。这个“距离”也是由数学空间所定义的。</p>
+<p>Matcher操作的元素是Descriptor，也就是描述符，测量的量是两者的距离，操作的方式是逐一测量，并选出最接近的两个描述符（Brute-Force Matcher），距离的描述方式不一，可以是L1范数，也可以是L2范数。</p>
+<p>一个DMatch Object抽象的是一对匹配的特征符，存储了特征符的序号、距离、图像序号。</p>
+<p><strong>Descriptor</strong></p>
+<p>matcher本身并不包含技术性的东西，特征符的选取和其在数学空间的位置都是由算法决定的，这个算法就是SIFT, ORB等。不同算法的选取方式不同，但不同的descriptor都在线性空间中，这就为Descriptor和matcher的解藕提供了基础。</p>
+<p>descriptor在opencv中表现为一个高维向量，descriptor和key point共用一个序号来代表一个特征点的性质</p>
+<p><strong>Key point</strong></p>
+<p>关键点包括3个内容：位置、尺度、方向。位置指关键点在图像上的位置，这里的图像是经过尺度变换得到的。方向是关键点具有旋转不变性的原因：同一组关键点的方向应该是一致的，因此统计出整个图像的方向后，就可以还原出图像被旋转的角度（如果整个图像方向为0，那就类似圆形）。</p>
+<p>Test: origin to scale_up:<br>– Max dist : 0.614476<br>– Min dist : 0.023140<br>normalized delta x=0.0046309<br>normalized delta y=0.0441643<br>normalized center=-0.0114116<br>Test: origin to left:<br>– Max dist : 0.593219<br>– Min dist : 0.025086<br>normalized delta x=-0.187185<br>normalized delta y=-0.0130463<br>normalized center=0.0207472<br>Test: origin to right:<br>– Max dist : 0.628698<br>– Min dist : 0.021708<br>normalized delta x=0.141781<br>normalized delta y=-0.0297364<br>normalized center=-0.0214759<br>Test: origin to up:<br>– Max dist : 0.679967<br>– Min dist : 0.036778<br>normalized delta x=-0.037491<br>normalized delta y=-0.216021<br>normalized center=0.0254128<br>Test: origin to down:<br>– Max dist : 0.537027<br>– Min dist : 0.024740<br>normalized delta x=0.00706097<br>normalized delta y=0.0883386<br>normalized center=0.0443451</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/04/%E3%80%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%91%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【读书笔记】算法导论</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/26/%E8%87%AA%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">自平衡小车开发笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
