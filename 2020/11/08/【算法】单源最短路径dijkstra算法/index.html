@@ -145,7 +145,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    1.5k 字
+                    1.6k 字
                   </span>
                 
 
@@ -155,7 +155,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    15
+                    17
                      分钟
                   </span>
                 
@@ -209,6 +209,12 @@
 <h3 id="零权重复杂度分析"><a href="#零权重复杂度分析" class="headerlink" title="零权重复杂度分析"></a>零权重复杂度分析</h3><p>将倍数代入复杂度，log(aN)被线性化，而ae也是线性增长的，因此整个时间复杂度增长速度近似线性增长。</p>
 <p>因为每层图都是一样的，0权重连接也可以通过邻接表查询到，所以权重存储空间与a无关。最短路径表和SPT会增长到aN，在第一次检测后，将最短距离减去最大权重依然大于当前最短距离的点看作不存在，当需要检测A层时，只需要存储可能经过的点的位置。</p>
 <p>也可以同时以起点和终点进行2次最短路径检测，然后对每一条边进行比对，就可以得到经过某条边到达终点的路径长度，如果大于最小路径减去最大权重的a倍，就删掉该条边（一定不会经过这条边），然后再删除孤立点</p>
+<h3 id="测试样例"><a href="#测试样例" class="headerlink" title="测试样例"></a>测试样例</h3><p><strong>样例1</strong><br>8 8 1<br>1 2 1<br>1 3 1<br>2 4 1<br>3 4 1<br>4 5 1<br>4 6 1<br>6 7 1<br>5 7 1<br>1 7</p>
+<p>输出 3 16</p>
+<p><strong>样例2</strong></p>
+<p>8 9 0<br>0 1 1<br>1 3 2<br>1 5 1<br>1 2 1<br>3 4 3<br>4 2 0<br>2 5 1<br>4 5 1<br>0 3 1<br>3 2</p>
+<p><strong>样例3</strong></p>
+<p>8 8 0<br>1 2 1<br>1 3 1<br>2 4 1<br>3 4 1<br>4 5 1<br>4 6 1<br>6 7 1<br>5 7 1<br>1 7</p>
 
             </article>
             <hr>
@@ -222,6 +228,12 @@
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
+                    
+                      <a href="/2020/11/10/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【算法】数值计算</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </div>
                   <div class="post-next col-6">

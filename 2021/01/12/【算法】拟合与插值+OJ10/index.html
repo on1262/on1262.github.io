@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>【算法】拟合与插值+OJ10 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                【算法】拟合与插值+OJ10
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2021-01-12 19:04">
+                    2021年1月12日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.2k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    13
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="拟合与插值"><a href="#拟合与插值" class="headerlink" title="拟合与插值"></a>拟合与插值</h2><p><strong>超定方程组</strong></p>
+<p>超定方程组是多次观测得到的结果，无法直接解出，需要拟合。</p>
+<p><strong>线性拟合</strong></p>
+<p>方程组的每一行看作一个数据点，每一列的数据是多项式的项，如x^2+x+1，第一列就是x^2,第2列就是x，第三列是1</p>
+<p>写成如上形式后，就不关注拟合表达式的结构，而全都看作线性拟合（使得每一行的误差满足最小二乘下的最优）</p>
+<p>解的存在性：如果列向量线性无关（即不出现Ax+Bx这种情况），就必定有唯一解</p>
+<p><strong>正规方程法</strong></p>
+<p>正规方程的A’A就是将A（m*n，看作n个m维向量）投影为n个n维向量，其中投影的方式满足m维向量到n维超平面的欧氏距离最短。</p>
+<p>Cholesky分解：就是对A’A有特殊的LU分解，其中U=L’，所以分解后得到的是LL’</p>
+<p>正规方程法得到A’A矩阵相乘复杂度O((mn^2)/2),Cholesky分解复杂度O(n^3/6)</p>
+<p>线性拟合问题的敏感性：</p>
+<p><strong>QR分解</strong></p>
+<h2 id="OJ10"><a href="#OJ10" class="headerlink" title="OJ10"></a>OJ10</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>假设有N个标志，每个标志置0或1，那么最多有2^N个状态，当N较小时，即使M较大，BFS最多搜索的状态数是2^N，多余的状态可以通过减枝删去（状态存储算法？）</p>
+<p>假设有M个塔，就是M个未知量，高斯消元法每次是O(M^3)的。当M较小时，即使N很大，也可以将多余的塔全部置0减少计算量。</p>
+<p>当M和N都较大时，指数增长远大于三次方增长，此时先用高斯消元法，找到真正可变的一组塔，然后以此缩小状态范围，再用BFS搜索得到解。</p>
+<p>若N&lt;9，且M&gt;10时，用BFS。其他情况用高斯消元法。</p>
+<p><strong>BFS</strong></p>
+<p>数据结构是一个struct，三个int，分别存储上一状态的序号、当前标志状态。先添加根节点到队列中。</p>
+<p>每次更新时，从队列取出一个节点，在visited结构中搜索状态是否已经被考察过。若未展开过，分别计算M个相邻节点标志的变化，得到新节点。再对每个节点判断它的标志状态是否已经考察过了，若考察过了，则不再添加到队列中（第一次考察时一定把它的所有子节点展开过了），若未考察过，添加到队列中。最后在visited结构中添加这个取出的节点（所有节点都被访问过了，所以不再考虑它）</p>
+<p>每次更新，更新开始方位的，再更新结尾方位的，最多的步数不超过M/2次（最短路径一定每个点至多踩1次）。结尾方位更新时，计算变化要用“减去”而不是“加上”</p>
+<p><strong>高斯消元</strong></p>
+<p>结构是一个N*(M+1)的矩阵A，其中A[m][n]的值等于第n个标志是否与第m个塔相连。然后解AX=B，其中B是目标状态，X是踩塔的解决方案。扩展M到M+1（把B包含进去），然后高斯消元，消元方式也是异或。</p>
+<p>当存在多种可能性的时候，无法保证找到最优解。也就是当塔的数量大于标志的数量时，解不一定正确。</p>
+<p><strong>改进后高斯消元</strong></p>
+<p>假如在高斯消元后，统计主元列的数量和位置，就可以找到非确定的变量。在非确定变量较少的时候，可以用暴力搜索找到最优值。</p>
+<p>检测点的非确定变量少于5个，搜索次数不会多余32次。可以比较顺利的实现。</p>
+<p>要减枝也有方法：在代入的过程中判断当前的塔个数是否已经大于计算出的最小值。但是这次时间较宽裕，所以不需要。</p>
+<p><strong>debug</strong></p>
+<p>最后2个判例内存不足，而且都是N=M的情况。有4-5个非主元列，暴力搜索最多需要32次.</p>
+<p><strong>小结</strong></p>
+<p>OJ10的工作量和debug难度都不小。BFS方法写起来比较复杂，而且为了查询操作O(logN)的复杂度，需要维护一个动态更新的二叉树。debug方面，有几次是角标、序号等细节错误，<strong>这说明在更改的时候要用查询和替换，不要自己看着代码改</strong>。最后一次是高斯消元写的有问题，应该先对各部分测试。</p>
+<h3 id="判例"><a href="#判例" class="headerlink" title="判例"></a>判例</h3><p>1<br>4 4 1<br>2 -1<br>1 3 4 -1<br>1 4 -1<br>1 2 4 -1<br>1 0 1 1</p>
+<p>1<br>4 4 1<br>1 -1<br>2 -1<br>3 -1<br>4 -1<br>0 0 0 0<br>输出：1 \n 1 1 1 1 -1</p>
+<p>1<br>4 4 1<br>2 4 -1<br>3 1 -1<br>2 4 -1<br>-1<br>0 0 0 0</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/12/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E6%8E%92%E5%BA%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【算法】排序</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/12/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E4%BC%98%E5%8C%96%E5%88%9D%E6%AD%A5/">
+                        <span class="hidden-mobile">【算法】优化初步</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>【算法】动态规划 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                【算法】动态规划
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-12-24 00:00">
+                    2020年12月24日 凌晨
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.4k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    14
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h2 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h2><p>对于一个问题，若满足如下3个条件，则可以用动态规划方法解决：</p>
+<p><strong>具有最优子结构</strong>：任意找一个中间状态，若这个解要成为全局最优解，那么从该状态到末状态的决策必定是该状态下的最优解</p>
+<p>注：若最优解能推导出从初始状态到中间状态的解也是最优的，那么就可以用贪心法。不需要DP</p>
+<p><strong>无后效性</strong>：一个状态即包含后续决策所需的所有前置信息。过去决策无法直接影响未来决策，而必须通过当前状态传递信息。</p>
+<p><strong>重复子问题</strong>：在求解时若用蛮力法会对相同问题重复求解，这也是DP能优化速度的原因所在。</p>
+<p>用DP方法时，有如下步骤：</p>
+<ol>
+<li>定义阶段和各阶段下的最优值</li>
+<li>从初始状态开始逐个计算最优值，每次计算时，遍历前阶段最优值</li>
+</ol>
+<p><strong>状态转移方程</strong>：在计算阶段K+1的时候，使用前K阶段的状态来计算得到K+1阶段的最优策略的方程</p>
+<p><strong>多维动态规划</strong></p>
+<p>动态规划一般会记录一个表，只要把这个表从小到大算一遍就能算出答案</p>
+<p>二维动态规划就是填一个二维的表，适用于有2个独立的阶段约束的情况（一般来说，数据规模也是二维的）</p>
+<h2 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h2><h3 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h3><p>描述：给出N件物品，每件价值不同，重量不同，给定总重量W，求解总价值最大的装载方案。</p>
+<p><strong>分析</strong></p>
+<p>直观地，选定W为阶段数，总价值为最优值。状态即是当前装载的物品列表。</p>
+<p>先考察最优子结构，对于最优的装载方案，给定中间的某个装载列表，则从剩余的物品中选择必定要选最优的组合，如果不选最优，可以用最优的替代，则原方案非全局最优方案。</p>
+<p>再考察无后效性：给定一个装载列表即可知道剩余的物品，也可知道当前重量，于是包含了所有前置信息。对于重量为W的方案，需要考察重量小于W的方案，因此满足重复子问题</p>
+<p>解决时，先从W=1开始，每次推导W+1阶段时，假设至多能添加一个新的物品（这个假设一定能覆盖到W+1的最优解的上一状态，且方便计算最优决策），遍历各个之前的状态，计算总和最大的一个状态。</p>
+<h3 id="钢条切割问题"><a href="#钢条切割问题" class="headerlink" title="钢条切割问题"></a>钢条切割问题</h3><p>描述：给定不同长度钢条的价格，再给一段长L的钢条，求解总价值最大的切割方案</p>
+<p><strong>分析</strong></p>
+<p>直观地，L是阶段数，总价值是最优值。状态是已经切完的长度L_0（为什么与01背包不同，因为物品拿走了就不能再拿，具有全局性，而钢条可以随意切割）</p>
+<p>最优子结构：假设前L_0的钢条已经切完了，那么从L_0到L的钢条必定也要切成最优方案。</p>
+<p>无后效性：只要得知L_0的钢条切割完，后续L_0到L的切割方式就可以随意制定，与L_0是怎么切割的无关</p>
+<p>解决时，先从L=1开始，每次假设只能多切一整段的钢条，所以L-L_0的部分直接卖出，而L_0的价格取之前计算的最优值。</p>
+<p>这个假设还是可以验证：若L长度的钢条切割方案卖得最好，那它必定能分解成L_0和L-L_0的单独段钢条，至于L-L_0有多长无法得知，但是只要遍历所有的单独段钢条，就一定能覆盖到最优方案。</p>
+<h3 id="股票交易（买卖股票最佳时机IV）"><a href="#股票交易（买卖股票最佳时机IV）" class="headerlink" title="股票交易（买卖股票最佳时机IV）"></a>股票交易（买卖股票最佳时机IV）</h3><img src="/2020/12/24/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/2020-12-24-11-00-18.png" srcset="/img/loading.gif" class="">
+<p><strong>分析</strong></p>
+<p>直观地，k是阶段数，总利润是最优值。</p>
+<p>先作一些预处理：将股票价格写为2日之差的形式，买卖就等效为寻找最大和子序列。那么阶段就等效为当前可交易的日期的数据（总数据抛去交易中的数据）</p>
+<p>最优子结构：假设已经进行了k_0笔交易，把剩下的天数抽出来重排，后续的交易在剩下的天数里必然也是能最大盈利的。</p>
+<p>无后效性：只要得到可以交易的天数的数据，前面的k_0笔交易无影响。</p>
+<p>注：假设一笔交易完全覆盖了之前的交易日期，也就是横跨了被截取的日期，那么之前的那笔交易就不是进行k_0笔交易时的最优交易，若横跨2个交易，也可以选择一次不交易。总之新的交易不会跨过之前交易的日期，进行日期合并是安全的。</p>
+<p>解决时，先默认k-0时利润为0，然后从k=1开始，每次先加载前k_0项交易，然后对处理过的数组寻找最大子序列，这是个O(n)的操作。</p>
+<p>附：最大和子序列问题：从第一个值累加，累加结果小于等于0时，舍去前面的结果。记录最大的累加结果就是最大和。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/12/%E3%80%90%E5%86%99%E4%BD%9C%E3%80%91%E6%B2%89%E9%BB%98%E7%9A%84%E5%A4%A7%E5%A4%9A%E6%95%B0%EF%BC%88%E7%8E%8B%E5%B0%8F%E6%B3%A2%EF%BC%89%E5%88%86%E6%9E%90%E4%B8%8E%E6%84%9F%E6%83%B3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【写作】沉默的大多数（王小波）分析与感想</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%9B%BE%E6%90%9C%E7%B4%A2/">
+                        <span class="hidden-mobile">【算法】图搜索</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

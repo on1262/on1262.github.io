@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>【读书笔记】C++性能优化指南 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                【读书笔记】C++性能优化指南
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2021-01-12 19:04">
+                    2021年1月12日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.7k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    18
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="C-性能优化指南"><a href="#C-性能优化指南" class="headerlink" title="C++性能优化指南"></a>C++性能优化指南</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>Experimentation, rather than intuition, is a theme of this book</p>
+</blockquote>
+<p>优化的时候有些技巧是与人的直觉相违背的。</p>
+<blockquote>
+<p>It takes the same amount of time to write efficient code as slow, wasteful code.</p>
+</blockquote>
+<p>作者的观点是养成写优化的代码的习惯，即使不知道那段代码是否为性能瓶颈。但是在不确定是否能优化的时候，就不要尝试牺牲效率、时间、代码可读性、代码出错率去做不确定的工作。</p>
+<p><strong>Reduce Memory Allocation and Copying</strong></p>
+<p>进行内存操作的时间可能是CPU计算的上千倍。</p>
+<p><strong>Remove Computation</strong></p>
+<p>关注热点代码：重复执行的部分</p>
+<blockquote>
+<p>Developers should therefore attempt not to go all OCD on a big code base changing every occurrence of i++ to ++i.</p>
+</blockquote>
+<p>不要代替编译器去做优化</p>
+<p><strong>Use Better Data Structures</strong></p>
+<p>略</p>
+<p><strong>Increase Concurrency</strong></p>
+<p>多线程方面的优化</p>
+<p><strong>Optimize Memory Management</strong></p>
+<p>改变原有的内存管理机制</p>
+<h2 id="内存速度"><a href="#内存速度" class="headerlink" title="内存速度"></a>内存速度</h2><p>指令和数据都存储在内存中，内存被划分为字（words），一小部分内存有直接对应的地址，称为registers, 其余内存地址都由地址寄存器来映射。</p>
+<blockquote>
+<p>Main memory is so slow that a desktop processor can execute hundreds of instructions in the length of time it takes to fetch a single data word from main memory.</p>
+</blockquote>
+<p>内存读取比执行指令慢了几百倍，部分因为内存距CPU太远，存取有延时。</p>
+<blockquote>
+<p>Access to a nonsequential location completes in somewhere between 6 and 10 cycles</p>
+</blockquote>
+<p>随机读取需要6-10个周期完成，顺序读取可以只要一个周期。</p>
+<img src="/2021/01/12/%E3%80%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%91C++%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/2020-11-18-17-21-07.png" srcset="/img/loading.gif" class="">
+<p>随机读取时间可以粗略估计成50ns，如果以GHz量级衡量CPU运行频率，那么一次内存存取需要50个CPU周期来完成。</p>
+<p>但只要读取的数据在原数据的cache line里，就可以只附加十分之一的时间读取到数据，所以顺序读取的速度为随机读取的十分之一左右。</p>
+<p><strong>缓存cache</strong></p>
+<p>（见 <a href="https://blog.csdn.net/qq_21125183/article/details/80590934）" target="_blank" rel="noopener">https://blog.csdn.net/qq_21125183/article/details/80590934）</a></p>
+<img src="/2021/01/12/%E3%80%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E3%80%91C++%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/2020-11-18-17-40-01.png" srcset="/img/loading.gif" class="">
+<p>cache在CPU内部，每次从内存中读取数据的时候，实际上是先存到cahce里，再从cache读取到CPU中，cache line一次读64Byte的数据，CPU一次从cache中读8Byte(64位)的数据，<strong>因此字节不对齐并不影响现代CPU的读取速度，因为一个cache line已经把附近的数据也包含进去了</strong></p>
+<p>当代码中出现长if-else语句时，执行的代码可能不在原来的cache中，所以尽量保证循环中的代码的跳跃行数不要太多。</p>
+<p>另外，if分支也让编译器难以改变代码顺序来优化指令执行速度。</p>
+<p>调用操作系统的指令是非常耗费时间的，可能比调用自身的方法慢一百倍量级。</p>
+<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p>string每次写入都会进行重新拷贝，这样是非常耗时的。一些方法可以优化string的性能，并且适用于其他场合。</p>
+<ol>
+<li>用修改替换重新写入：+=操作符等价于append,不会将原来的字符串复制一份。（提升10倍）</li>
+<li>预分配内存：每次扩展容量事实上都包含一次全部的复制，预分配内存可以减少若干次复制操作（提升20%左右）</li>
+<li>使用迭代器：迭代器在几乎任何情况下都比角标寻址要快（提升20%）</li>
+<li>将返回值作为输出参数，并传递引用：传递引用避免了一次拷贝，但是代价是每次调用都会进行一次解引用（取指针指向的地址）操作。返回值不需要多次执行，所以这个代价可以接受。</li>
+<li>利用append或substr对整块内容进行存取（快20%左右）</li>
+<li>采用C风格的固定大小数组，能快上100倍左右。</li>
+</ol>
+<h2 id="算法改进"><a href="#算法改进" class="headerlink" title="算法改进"></a>算法改进</h2><p><strong>预先计算</strong></p>
+<p>将可预见的重复计算部分放一开始的运行期、编译期或直接内置结果。</p>
+<p><strong>懒计算</strong></p>
+<p>只有在需要结果的时候才计算，这样能消除中间的一些重复计算过程</p>
+<p><strong>批处理</strong></p>
+<p>对一批数据进行处理，取代单个数据连续地处理</p>
+<p><strong>结果缓存</strong></p>
+<p>对中间结果缓存，减少重复计算开销</p>
+<p><strong>双重检查</strong></p>
+<p>先检查必要条件是否满足，大部分情况下都能得到正确的结果；如果检测的必要条件都满足，再用复杂的方法去检查所有条件是否满足，使得小部分情况下也能输出正确的结果。</p>
+<h2 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a>动态内存分配</h2><p><strong>堆分配内存是极慢的</strong></p>
+<p>new一个对象，首先要在应用程序本身被分配到的内存中寻找合适大小的区块，如果没有，就需要向OS申请更大块的内存（这个操作极其耗时）</p>
+<p>delete也是很慢的，这是因为delete要尽量回收内存碎片，会做许多不必要的操作。</p>
+<p><strong>栈内存与堆内存</strong></p>
+<p>栈内存比堆内存快，栈内存有cache映射，可以直接读取，不要间接寻址。堆内存因为不确定被分配到哪了，可能不在cache中。</p>
+<p>函数调用涉及参数的复制、函数入栈，重复调用应当写成inline.</p>
+<p>栈内存在运行中创建和销毁开销是0，因为所有操作都是编译期被确定好了的，没有检查。栈内存因为会被反复调用，所以大概率处于cache中（然而本身只是一块普通的内存，不一定总是在cache中，而且如果栈中的数组太大，也不会全部被包含在cache中，此时的随机读写和堆内存中的读写速度是一样的，但栈调用没有new操作和delete操作耗费的时间，依然更快）</p>
+<p>全局变量被分配在全局存储区中，对于小变量，全局存储区不如栈的效率高（有cache），但是对于大数组，在哪开都是一样的，因为cache都无法在64Byte内读取到所有元素。</p>
+<p><strong>避免动态分配内存</strong></p>
+<p>两阶段初始化：先统一分配内存，再在需要的时候将数据装入完成初始化，这样就避免了动态分配内存。</p>
+<p>避免的一个方法就是用静态的大数组代替可变数组，将能确定下来的东西先确定了，从而避免低效的再分配。</p>
+<p>第二个方法是避免再分配内存。可以在循环外进行初始化，对于类和大数组可将复制变为引用，减少一次内存分配。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/12/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E6%9F%A5%E8%AF%A2/">
+                        <span class="hidden-mobile">【算法】查询</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

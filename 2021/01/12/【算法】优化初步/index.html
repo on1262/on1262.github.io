@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>【算法】优化初步 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                【算法】优化初步
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2021-01-12 19:04">
+                    2021年1月12日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    2.1k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    22
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="优化初步"><a href="#优化初步" class="headerlink" title="优化初步"></a>优化初步</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>优化问题</strong></p>
+<p>优化问题就是在给定条件（等式，不等式）下寻找目标函数的最值点</p>
+<p>例如：给定总面积，做一个容积最大的盒子、给定盒子容积，求如何做总面积最小</p>
+<p>若条件和目标函数都是线性的，那么就是线性规划</p>
+<p><strong>凸性</strong></p>
+<p>当优化问题是“凸”的，也就是说：局部最优点=全局最优点（只有一个局部最优点），那么就可以用局部信息找到全局最优点。</p>
+<p>强制：若函数在x极大或极小时都趋近正无穷，那么函数就是强制的。强制的函数在闭区间上一定存在最小值。</p>
+<p><strong>优化条件</strong></p>
+<p>如何判断一个点是局部最优点，也就是n维空间下的局部极小值。</p>
+<p>取偏导数判断：海森矩阵（正定、不定）、拉格朗日函数求极小值</p>
+<p>取所有可行方向：从最优点看，在所有方向上，最优点都是最低点（方向导数大于0）</p>
+<h2 id="一维优化方法"><a href="#一维优化方法" class="headerlink" title="一维优化方法"></a>一维优化方法</h2><p><strong>黄金分割搜索</strong></p>
+<p>对于单峰函数（左边下降，右边上升，只有一个最低点），对于一段a-b的f(x)，取黄金分割的两个点(tau和1-tau)，比较这两个点的大小，最小值只能在较小点所在的区间中（每次能排除一小半的x）</p>
+<p>注意：必须要单峰函数才行。</p>
+<p><strong>牛顿法</strong></p>
+<p>用抛物线拟合一个点的函数值、一阶导和二阶导，然后预测底部，接着跳转底部继续预测。</p>
+<p>好处：初始值比较近时，平方收敛。<br>坏处：可能找到极小值不是最小值</p>
+<p><strong>保护法</strong></p>
+<p>用黄金分割法得到合适的初值，用牛顿法快速收敛到解。</p>
+<p>混合方法，收敛更快，但是也要注意适用于单峰函数。</p>
+<h2 id="多维优化方法"><a href="#多维优化方法" class="headerlink" title="多维优化方法"></a>多维优化方法</h2><p><strong>最速下降法</strong></p>
+<p>可微函数的负梯度总是指向下降最快的方向，所以每次迭代朝着负梯度前进寻找下一个点即可。</p>
+<p><strong>多维牛顿法</strong></p>
+<p>求解线性方程组（？？？）</p>
+<p>缺点：牛顿法对初值相当敏感，</p>
+<p><strong>KKT条件</strong></p>
+<p>先求临界点，再筛选真正的极小值</p>
+<p><strong>障碍法</strong></p>
+<p>将约束条件转化为惩罚函数，使得可以在R^n上搜索结果（即使搜索到了可行域之外的，惩罚函数会使得成本充分大，让无约束问题的最优点等效于原问题）</p>
+<p>会选取特定形式的惩罚函数，分为等式和不等式两种情况。</p>
+<h2 id="凸优化"><a href="#凸优化" class="headerlink" title="凸优化"></a>凸优化</h2><p>凸集合：顾名思义</p>
+<p>线性组合是凸的，非负线性组合是凸的，范数球也是凸集，</p>
+<p>凸函数：全局最优=局部最优</p>
+<h2 id="OJ8"><a href="#OJ8" class="headerlink" title="OJ8"></a>OJ8</h2><p><strong>一维情况</strong></p>
+<p>假设一条路径是最优的，那么它每两个点之间的路径也是最优的。</p>
+<p>对于最优路径上每一个点k，它在0-k范围内也是最优的。</p>
+<p>假设每个点都存储了从0到该点的最优路径经过的点数目f(k)，那么在计算f(k+1)的时候，只要找到比自身位置低的点中f(x)最大的点m，就有f(k+1)=f(m)+1</p>
+<p><strong>一维情况的思路</strong></p>
+<p>先读取所有高度，连同顺序，即ind+H，读到数组A中，然后对A快排（nlogn），再遍历ind（n），得到顺序与高度位置的映射（给定一个顺序，找到高度所在位置），在高度顺序表基础上建完全二叉树，树的节点存储子节点f(m)的最大值，默认为0。</p>
+<p>用顺序到高度的映射依次更新f(m)：每次更新，查找比自己小的高度的对应f(m)的最大值（最多找logn次），找到后即可更新自己的f(k)=max{f(m)}+1，因为其后添加的节点的f(m)都是0，所以不影响结果。</p>
+<p>更新后，依次向上更新max{f(m)}, 最多logn次。单次更新是O(logn)量级，更新所有后，记录最大值。</p>
+<p><strong>二维情况</strong></p>
+<p>在计算f(k+1)的时候，只要找到x,y都不超过自己的点中f最大的点m，就有f(k+1)=f(m)+1</p>
+<p>先用kd树对(sl,sr)区域进行划分，同时非叶子节点存储区域内的max{f(m)}，然后依然用ind-&gt;node映射来依次更新f(k)：</p>
+<p>首先查找x,y都小于自身的区域的最大f(m)的值，不妨将2层合并，假设一次查找4个区域1234，当更新的节点落在不同区域时，要接着深入的区域也不同，但总的来说，一次查找平均能减少1/2的无效区域，同时节点落在每个区域的概率是随机的，所以总查找消耗应该不是n^2级别，但还没法具体计算时间复杂度。</p>
+<p>这种查找方式应该与最近邻有一种形式的等效，可以直接看作sqrt(n)的复杂度？</p>
+<p>在具体实现的时候，用了类似的思路，但是在每次对单层进行操作的时候，需要注意一些细节：在nth_element选择的时候，无法保证每次的中点是<strong>相等的x,y中最晚加入的点</strong>，于是无法保证当该点的值为分界线时，需要检测的点都在一边，所以这个地方的等号不能加。</p>
+<p>如果结合两层判断，就需要在具体到节点的时候再保证一次有效性，但是相反地，在排序的时候就不需要再控制pos的关系。</p>
+<p>实际测量了8次不同N的耗时，发现确实是符合n<em>sqrt(n)的，*</em>这种用数据量来检测时间复杂度的方法也可以用来debug：看自己是不是写出了符合条件的复杂度**</p>
+<p><strong>性能优化</strong></p>
+<p>这次OJ对性能要求非常苛刻，在复杂度O(n*sqrt(n))不变的情况下，对若干细节进行优化，使得最后在N=5E4的速度比最开始的速度快了4倍。</p>
+<p>首先是优化kd树中获取子节点/父节点的函数，先是用数组序号代替引用，然后把多余的调用手动合并掉，再用arr2pow数组计算2的若干次方的结果，这些步骤把耗时从3000ms降到了1000ms</p>
+<p>接着是进一步优化，虽然写了inline，但是速度依然受限，所以用位运算+宏的方式把函数原地展开，这一步把耗时从1000ms降到了800ms左右</p>
+<p>再接着是把scanf用快读代替，这一步能优化几十毫秒，否则scanf会占到100-200ms，对结果影响很大。</p>
+<p>再接着是对一些细节进行优化，比如count计数其实不需要，直接删除。除2和模2都用位运算代替；最后一层可以先判断isleaf，节省一次调用开销（整个创建期间，节省了N次调用开销）；查询的方法参数过多，而且都是bool量，将其合并在一个char里面，用位运算来读取和写入，节省了一些内存复制的开销。</p>
+<p><strong>Debug</strong></p>
+<p>这次OJ的debug也非常困难，具体地说，一是难以构建判例发现错误的逻辑，二是难以跟踪OJ的WA</p>
+<p>有一次RTE是因为数组开的不够大，但是如果用constexpr的话，<strong>数组不够大并不会报RTE而是WA</strong>。理论上虽然完全二叉树只需要2N的空间，但是实际上logN是非整数，完全二叉树的最下一层是默认上面都填满了的，所以需要用2^17来计算而不是2N来计算。</p>
+<p>debug的时候比较困难的是找判例，大多数简单判例并不能找到bug。<strong>这时候用大判例+数量级的判断</strong>就可发现一些问题，或者是<strong>自己随机写一些临界判例，有概率恰好碰到bug</strong>，但是最保守（做完后看来也是非常有效的）的方法<strong>是写一个复杂度劣化的版本，然后用随机数构造判例</strong></p>
+<p><strong>判例</strong></p>
+<p>test1的全部数据输入时，答案是81</p>
+<p>1<br>10<br>18467 41<br>26500 6334<br>15724 19169<br>29358 11478<br>24464 26962<br>28145 5705<br>16827 23281<br>491 9961<br>11942 2995<br>5436 4827</p>
+<p>1<br>5<br>100 100<br>10 10<br>20 20<br>30 10<br>10 50</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/12/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E6%8B%9F%E5%90%88%E4%B8%8E%E6%8F%92%E5%80%BC+OJ10/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【算法】拟合与插值+OJ10</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/12/OJ%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/">
+                        <span class="hidden-mobile">OJ优化指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

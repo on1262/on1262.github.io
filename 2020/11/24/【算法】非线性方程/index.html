@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>【算法】非线性方程组 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                【算法】非线性方程组
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-11-24 00:00">
+                    2020年11月24日 凌晨
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.7k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    17
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="非线性方程组"><a href="#非线性方程组" class="headerlink" title="非线性方程组"></a>非线性方程组</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>病态问题：若函数在零点附近切线接近水平，则求根问题病态：切线y的变化会造成x的剧烈变动。</p>
+<p>收敛速度：假设迭代进行很久以后，每一步迭代的误差都是上一步误差的r阶量，则称为r阶收敛（一阶=线性，二阶=平方，三阶以上=超线性）</p>
+<p>判停：一般通过固定的迭代步数、每一步的误差变化、残差（？）</p>
+<h2 id="非线性方程的解法"><a href="#非线性方程的解法" class="headerlink" title="非线性方程的解法"></a>非线性方程的解法</h2><p><strong>二分法</strong></p>
+<p>条件：需要知道解的区间、方程连续（适用于介值定理）<br>思路：对区间用介值定理不断二分<br>性能：线性收敛，每次迭代增加一个二进制有效位，迭代步数与方程无关<br>缺陷：二分法截止采用两次迭代之差，但是若真值接近0，<strong>则迭代结果只保证绝对精度，无法保证有效数字</strong>，若采用相对误差，则可能会产生除0问题。</p>
+<p><strong>试位法</strong></p>
+<p>条件：与二分法一致<br>思路：将二分法的二分替换为线性拟合：当已知两点符号相反时，可知至少有一个根，然后认为方程就是过这两点的一条直线，计算出直线的零点，代入检验，若不对，则继续细分。<br>性能：因为计算零点时用到了函数的性质，当函数一部分平坦一部分陡峭的时候，收敛会变得非常缓慢</p>
+<p><strong>不动点迭代</strong></p>
+<p>不动点的唯一性：对g(x)=x的理解可以是：当g(x)斜率绝对值不超过1时，g(x)在y=x下面的点不可能跑到上面去，所以必定只有一个分界点。</p>
+<p>不动点法的收敛性：在每一个点作切线，这个切线与y=x形成一个矩形，迭代下一个x只能在矩形内部，且g(x)把长映射到宽，也就是说每次迭代的矩形必定是嵌套的。嵌套有传递性，且嵌套的程度取决于g’(x)，当g’(x)绝对值不逼近1时，逼近每次都有个下界，所以必定能得到结果。</p>
+<p>当|g’(x)|&lt;1不满足时，只能期望迭代后能够进入到满足条件的小矩形中。当g(x)=x不满足条件的区间不够长时（总有收敛区域承接，而不是在两个发散区域内“反射”），就不足以导致发散。</p>
+<p>缺陷：不满足条件时不一定收敛。</p>
+<p>不动点定理也可以用来求收敛性。</p>
+<p><strong>牛顿法</strong></p>
+<p>思路：一种理解是从切线角度理解，即每次迭代都将方程局部近似线性化。另一种是将其理解为规范化的不动点函数，即每次按照一定规则选取不动点函数</p>
+<p>性能：如果收敛，则简单根至少平方收敛，重根线性收敛。不收敛可能有：振荡（两个点之间反复迭代），极小值发散。简单来说就是用不稳定性换收敛速度。</p>
+<p>改进牛顿法：主要针对重根进行改进，构造零点相等的f(x)/f’(x)，将上下的m-1阶极小抵消，就能保证平方收敛。</p>
+<p>改进牛顿法需要事先知道根的阶数。</p>
+<p><strong>割线法</strong></p>
+<p>思路：主要是在牛顿法上改进：将求切线转化为求前2步的点形成的割线，当前两步相差较小时，总能逼近切线。</p>
+<p>性能：收敛阶数1.618，相比牛顿法，放弃了收敛速度换得计算复杂度</p>
+<p><strong>反插法</strong></p>
+<p>思路：在y-x平面上，先测三个点，然后认为非线性方程是三个点拟合出来的二次函数，接着求出交点，继续验证并拟合。为了确保预测的存在性，拟合函数为x=g(y)</p>
+<p>性能：收敛阶数1.839</p>
+<h2 id="解法小结"><a href="#解法小结" class="headerlink" title="解法小结"></a>解法小结</h2><p>所有解法都是利用局部性质或整体性质。当非线性方程连续的时候，它在零点局部有很好的性质，即局部可以线性化，在整体上也有很好的性质，就是介值定理。二分法和试位法是比较保守的思想，就是先确定解的范围，然后高效地“挨个”搜索。不动点迭代利用了函数的性质，在限定条件下适用的较激进解法。牛顿法完全利用局部性质，把局部性质完全套在整体性质上。所以不一定收敛，但是寻找的速度比较快。</p>
+<p>利用局部性质预测，越接近零点预测越准（函数局部线性化），收敛速度就越快。利用整体性质预测，在远离零点的时候也能利用有效信息（符号），但是符号提供的信息有限，收敛速度只有一个整体下界。</p>
+<h2 id="OJ8"><a href="#OJ8" class="headerlink" title="OJ8"></a>OJ8</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>根据文献，采用单隐藏层，300隐藏节点的多层感知机。预处理后可以得到1.6%的错误率。</p>
+<h3 id="样例和通过记录"><a href="#样例和通过记录" class="headerlink" title="样例和通过记录"></a>样例和通过记录</h3><p>样例2，4，7，8，9的样本都小于1000<br>样例1，5，6样本大于1000但是小于3000<br>样例6样本大于1000小于2000<br>样例10样本N=3000<br>样例3样本大于3000</p>
+<p>训练次数6000，能过234789样例，但6一直无法过<br>1，5，10在训练2000次时满足acc小于0.1，但是依然WA,可能是过拟合<br>1，5在训练1000次时通过，<br>样例6数据量在1000到2000之间，样例10<br>训练量2000的时候样例10能过</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>OJ8的主要问题是debug，首先MLP这个东西就充满了不确定性，在此基础之上，网络性能受到多个参数影响，还有潜在的代码错误问题。</p>
+<p>在结构层面上，参考前人所写的结构，这就有了个准确度上限的参照。用MNIST可以忽视数据集的影响：避免样例的过拟合与欠拟合导致的WA。在参数设计上，若MNIST上跑出理想的模型，就只需要根据数据集进行特化的调整。</p>
+<p>可以看出，在NN设计中，一套合理可靠的评价体系直接决定了参数的可靠性和网络的鲁棒性。同时也有一个思路，<strong>就是模仿样例的设计，先从二分类的简单情况开始测试，逐渐过度到多分类情况</strong></p>
+<p>测试结果的图形化表示也是问题。图形化表示有助于找到数据的趋势，同时便于人手动优化参数。<strong>原则上，一切呈现给人的复杂数据都应当是图像化的</strong></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">数值计算</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【算法】算法优化策略</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/18/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84/">
+                        <span class="hidden-mobile">【算法】线性方程组</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
