@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>GAN原理及衍生 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                GAN原理及衍生
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2021-03-07 21:33">
+                    2021年3月7日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    3.4k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    36
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="传统GAN"><a href="#传统GAN" class="headerlink" title="传统GAN"></a>传统GAN</h1><h2 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h2><p>首先有2个网络，生成网络G输入噪声，输出逼真的图像，判别网络D输入图像，输出推测的真假值（0-1）</p>
+<p>先找来一堆目标图像，然后随意初始化G，输入噪声，输出一堆模仿的图像，然后将模仿的图像标记为0，将真图像标记为1，输入到判别网络D中训练</p>
+<p>训练后，判别网络D能成功地区分现在的网络G生成的假图像，然后将D连在G后面，形成新的网络Z，Z网络输入是噪声，输出是真假值。接着对网络Z训练：输入随机噪声，然后将标签设置为1，这样得到的误差反向传播到G网络部分时，就是每个像素点相对于“D网络认为的真实图像的差距”，就可以用来改进G网络，此时D网络的权重不会变化。</p>
+<p>每轮训练时，只有在D网络学习到能分辨真假时才具有超越G网络的水平，此时G网络才能借由Z网络学习到D网络中新的知识。若D网络在给定真假图片时完全无法区分它们了，反映到训练时的情况就是：无论给出的图片是真还是假，D网络输出都接近0.5，每次更新权重时的起始误差都是1-0.5=0.5，且随着训练轮数变多，这个误差还是无法降低到0.5以下。</p>
+<h2 id="理论推导"><a href="#理论推导" class="headerlink" title="理论推导"></a>理论推导</h2><p><strong>KL距离</strong></p>
+<p>KL距离表示两个概率分布间的差异，体现为用一个概率分布去描述另一个概率分布所增加的比特数。</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-09-36-31.png" srcset="/img/loading.gif" class="">
+<p>对离散数据，代入每个x得到分布中的概率，然后求和即可。这个距离可以判断分布的差异，分布差异越大，KL距离就越大，从KL距离来看，对最优化目标公式V的概括描述就是：在对数下，让D(x)的概率分布更加接近data的分布，远离G的分布</p>
+<p><strong>分布与最优化</strong></p>
+<p>若给定一组真实数据，我们希望网络能学习到这些数据中像素的分布（在一个高维空间上的分布，比如说，所有猫的图片都可以被映射到区域X上，要学习的就是这个高维区域X）。倘若能得到这个分布，就可以随意提取一张分布中的图片（向量），来表达训练数据以外的图片。但现实中无法得到真正的X，因为手工描述太过复杂。所以在X中选取一堆数据，也就是训练用的图片，<strong>近似以这组图片的分布作为真实数据的分布</strong>，对于待训练的网络G，以其在高斯分布噪声下的输出分布作为其学到的分布。相当于网络G将高斯分布映射到理想的分布X上</p>
+<p>GAN最优化的目标公式：</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-09-55-13.png" srcset="/img/loading.gif" class="">
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-09-55-29.png" srcset="/img/loading.gif" class="">
+<p>直观地理解，先假设$P_G$和$P_{data}$之间的共有区域测度为0（就是几乎不重合），此时对于来自真实数据data中的x，若判别器D是理想的，那么总是会输出D(X)=1，对于来自虚假数据g中的x，输出D(X)=0，显然这样一来，对于data中的数据，输出期望取对数就是0，对于g中的数据，输出期望在该公式下也是0，这就达到了V的最大值。</p>
+<p>当生成器愈发接近真实数据的分布时，判别器不可能给出明确的0和1了。假设生成器是完美的，不难得出此时判别器的输出只能是各为0.5，才能达到V的最大值。</p>
+<p>整个训练流程相当于求G和D两个“维度”下V的最优化参数（实际上G和D各自都包含了若干个维度的参数），类比于二维优化的梯度下降法，交替训练只不过是每次在单独的“维度”上进行梯度下降而已</p>
+<p>训练开始时，D很容易区分G和真实的图片，很快就能收敛到0，到最后，D无法区分，此时V的输出接近-2log2</p>
+<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-10-15-52.png" srcset="/img/loading.gif" class="">
+<p>以下讨论仅针对一轮（iteration）训练：</p>
+<p>首先选取m个样本，这些样本显然来自于期望学到的分布$P_{data}$的，然后选取m个噪声，这些噪声来自于一个随意指定的分布$P_{prior}$，不妨用高斯分布。</p>
+<p>然后用噪声来得到生成器的输出G，接着将真实数据和噪声数据组成m对，放入判别器D中，计算出V，由V的梯度得到误差，用来更新判别器的网络（注意，V至少只有一个最大值，也许具有某些凸的性质让收敛比较容易）</p>
+<p>在判别器训练到收敛后，再用D来训练G。选取m个在prior中的样本，将这些样本依次经过G和D，用V更新g参数。</p>
+<p>注意，在生成器训练的环节，生成器只需要尽可能接近判别器就好了，所以只有一项，而图片中依然用log，然后在学习率前加负号，这种方式使得D的输出默认依然是1，然而由于log的性质，当训练到接近成功的时候，梯度会被放大，从而加快了收敛速度。</p>
+<p><strong>训练中注意的问题</strong></p>
+<p>虽然G的输入是噪声，但噪声也要符合prior的分布，因为网络是将分布映射到分布，所以分布本身也是一个信息。</p>
+<p>对D的训练中，每次最大似然的参考分布就是m个数据的分布，对于越复杂的物体，m应该越大，这样才能较完整地描述物体的性质。而且，对越复杂的物体，采样的prior的维度也应该越大，<strong>这是因为G将采样的分布映射到高维分布，若采样分布维度太少，那么映射出来的分布在高维空间中仍然是低维的，不一定能覆盖真实数据的维度</strong></p>
+<p>由最优化目标可知，找到的最优点并不是极点，而是鞍点：</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-10-56-55.png" srcset="/img/loading.gif" class="">
+
+<p>在早期的时候min(log(1-D))存在梯度消失问题，改成max(log(D))会有改善（选取其他非线性的函数？）</p>
+<p>高斯分布的噪声比均匀分布的噪声要好，因为均匀分布实际上是一个正方体的样子，正方形相对于圆更难被映射到复杂图像上</p>
+<p>实践中，ReLU和MaxPool这种稀疏梯度效果差，这些方法只注意主要部分忽略次要部分，使得每次训练犹如盲人摸象一般，很难挖掘出共同点。</p>
+<p>使用软标签：把1和0泛化为0.7-1的随机数和0.3-0的随机数，猜想目的应该是让分布尽可能重合得比较好</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>GAN之前的生成模型，如VAE，直接用输出图像像素的均方差作为误差，这种图像误差计算方式是不合理的。而GAN相对于这种手工判别的方式，采用神经网络来生成和分配误差，显然比人手工设定有优越性。</p>
+<p>V的函数是有缺陷的：初始状态，D很容易收敛，但对G提供的信息太少，最终状态，D不容易收敛，且对G提供的信息还是太少。这个问题在WGAN得以解决。</p>
+<p>GAN本身并没有风格单一化的问题，这是因为倘若学习到的分布不能覆盖真实分布，那么训练时输出误差就是无穷大，但虽然GAN能覆盖到目标分布，不代表GAN的映射中，各风格是均匀的。</p>
+<h1 id="GAN衍生"><a href="#GAN衍生" class="headerlink" title="GAN衍生"></a>GAN衍生</h1><p><strong>CGAN</strong></p>
+<p>CGAN解决了用一个GAN生成不同风格的图像，方法是将风格作为一个（或若干个）新的维度，并在噪声输入中，但这种情况下的真实图片也得按照风格分类，就是打tag了的，</p>
+<p><strong>PatchGAN</strong></p>
+<p>PatchGAN的输出不是概率数，而是一个概率矩阵，每个元素表示它所观测的范围的真假程度。只要对原始的图像经过多层卷积，就能得到所要的概率矩阵。每次判断时，可以精细地比较局部的判断结果与真实值的误差，从而得到更合理的误差。</p>
+<p>通俗来说，原始的GAN是指出整幅画的好坏，而PatchGAN分别指出一副画各个部分的好坏，从而可以更详细地改进</p>
+<p>从GAN的训练原理可以看出，真正有用的信息包含在误差的计算中，只有得到有效的误差才能继续训练神经网络。</p>
+<p><strong>LSGAN（最小二乘GAN）</strong></p>
+<p>传统GAN最后一层用sigmoid归一化到0-1的概率，对sigmoid来说，原始输入的x一旦脱离了sigmoid线性区，那么将很难辨别出来。然而实际上那些远离的x大概率是非正常的图片，此时sigmoid无法将其区分开。</p>
+<p>LSGAN去掉了sigmoid函数，且去掉了交叉熵，用最小二乘的形式代替，从而使得原始输出也在0-1的合理区间。</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-11-44-55.png" srcset="/img/loading.gif" class="">
+<p>LSGAN改进了生成图片质量和稳定性，但无法避免WGAN中的零测集问题，且LSGAN引入了风格单一化的问题</p>
+<h2 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h2><p><strong>传统GAN的问题</strong></p>
+<p>GAN的两个loss都是局部的，而没有一个全局的loss进行训练情况的指示，也就无法量化生成图片好坏。而且，传统GAN有模式崩坏的问题，生成图片缺乏多样性（实质上是映射的程度不一致）</p>
+<p>观察G的最优化目标：</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-12-09-29.png" srcset="/img/loading.gif" class="">
+<p>假设D已经能完全区分G和真实数据，那么代入上述公式，D(G(z))一定为0，得到的误差就是0，从而产生梯度消失问题。直观地说，若G的分布与真实分布相差极大，那么D即使把他们分割开了，也不能给G提供什么有效信息，只是告诉G“你们之间完全没有交集”，从而使得G无法继续学习。</p>
+<p>假设D训练得不好，此时给出的梯度是不准确的，因为D本身也不包含多少信息，而且有相等的噪声，此时生成器也得到了无效数据。</p>
+<p>总之，G训练得太好太差都无法产生作用。</p>
+<p>另外，原始GAN中-log D trick尽管改善了训练速度，但是这等价于：</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-12-21-58.png" srcset="/img/loading.gif" class="">
+<p>KL散度和JS散度都代表了分布的距离，但它们在同一优化目标下的方向是相反的，这就使得训练不稳定，而且此时的KL散度不是原本的那个KL散度，观测角度不同会导致多样性缺乏（直观地说，从A看B，发现自己已经全部覆盖B了，但是从B看A，A并没有全部覆盖B，现实中，我们希望D分布全部覆盖真实分布，但不希望D分布只覆盖一部分真实分布）</p>
+<p><strong>Earth-Mover距离</strong></p>
+<p>也叫W距离。对于真实分布r和生成器分布g，力图将g中的图片作尽可能微小的改动使得其可以与r重合，这些微小改动的总和就是W距离。</p>
+<p>但这种距离无法直接求解，通过一些定理，可以将其变换为：</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-12-33-38.png" srcset="/img/loading.gif" class="">
+<p>其中K是Lipschitz常数，K是函数的导数的上界。实际上，只要保证网络f的各个权重在一个范围内，那么叠加后的输出必然有一个导数上界，所以事实上这个K只改变绝对量而不改变相对量，是可以去掉的。</p>
+<p>于是优化目标为让L最大：</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-13-23-30.png" srcset="/img/loading.gif" class="">
+<p>这个L就可以定义为loss，L越大，两者的区分度就越大，L越小，分布的距离就越小。这个L就可以指示训练的进度</p>
+<p><strong>WGAN</strong></p>
+<p>WGAN改动有4点：</p>
+<ol>
+<li>判别器最后一层去掉sigmoid</li>
+<li>生成器和判别器的loss不取log</li>
+<li>每次更新判别器的参数之后把它们的绝对值截断到不超过一个固定常数c</li>
+<li>不要用基于动量的优化算法（包括momentum和Adam），推荐RMSProp，SGD也行</li>
+</ol>
+<p>第一点是由于WGAN不是二分类问题，所以不需要sigmoid，第二点是W距离的本质改动。第三点是K的限制。第四点是实践技巧，没啥理论依据。</p>
+<p>对判别器而言，要使</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-13-43-03.png" srcset="/img/loading.gif" class="">
+<p>最大，即利用网络的拟合能力来找到取得上界的f。</p>
+<p>对生成器而言，要使得：</p>
+<img src="/2021/03/07/GAN%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A1%8D%E7%94%9F/2021-01-24-13-44-34.png" srcset="/img/loading.gif" class="">
+<p>最小，因为这个地方只有生成器的权重变化，所以实际上也就是要W距离最小</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>从WGAN可以看出，loss函数的性质是非常重要的，loss函数的零点是比较重要的，那么loss的曲率是否对网络训练有影响？显然像x^2和atan(x)这种都会有梯度消散问题，那e^x是否可以？若将sigmoid(kx)中的k设置为足够小是否也可以呢？</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/07/%E5%9B%BE%E5%83%8F%E9%87%8D%E5%BB%BA_PI-REC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图像重建_PI-REC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/07/%E5%8E%9F%E5%AD%90%E5%8C%96%E7%9A%84%E7%A4%BE%E4%BC%9A/">
+                        <span class="hidden-mobile">原子化的社会</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

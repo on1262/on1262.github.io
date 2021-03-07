@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Chenyt">
+  <meta name="keywords" content="">
+  <title>Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Home</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/design2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2021/01/12/OJ%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/">OJ优化指南</a>
+
+      <a href="/2021/01/12/OJ%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/" class="index-excerpt">
+        
+        
+          
+        
+        <div>OJ优化指南输入输出
+scanf和printf代替cin和cout：在一些情况下，加了sync后者也会占用相当长的IO时间
+需要用 #pragma warning(disable:4996) 避免报错
+快读：快读旨在利用已知的输入格式避免读取数据时的逻辑判断（边界、有效值、其他可能情况）
+
+样例估计
+用assert估计样例规模（二分法），有助于判断一些因为规模太大而WA的情况
+assert估计规模</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-01-12
+          </div>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2021/01/12/%E3%80%90%E5%86%99%E4%BD%9C%E3%80%91%E6%B2%89%E9%BB%98%E7%9A%84%E5%A4%A7%E5%A4%9A%E6%95%B0%EF%BC%88%E7%8E%8B%E5%B0%8F%E6%B3%A2%EF%BC%89%E5%88%86%E6%9E%90%E4%B8%8E%E6%84%9F%E6%83%B3/">【写作】沉默的大多数（王小波）分析与感想</a>
+
+      <a href="/2021/01/12/%E3%80%90%E5%86%99%E4%BD%9C%E3%80%91%E6%B2%89%E9%BB%98%E7%9A%84%E5%A4%A7%E5%A4%9A%E6%95%B0%EF%BC%88%E7%8E%8B%E5%B0%8F%E6%B3%A2%EF%BC%89%E5%88%86%E6%9E%90%E4%B8%8E%E6%84%9F%E6%83%B3/" class="index-excerpt">
+        
+        
+          
+        
+        <div>沉默的大多数前言这个笔记有两个目的：第一是分析杂文的写作风格，包括逻辑、结构、情绪、用词等，是对文章的分析；第二是分析杂文的思想，与当今的现状进行对比，完成对思想的批判。
+以下是写作风格的细分：
+结构
+精彩的开头、精彩的结尾
+逻辑
+如何给出定义、如何进行论证、如何巧妙的引导读者
+情绪
+如何调动读者情绪、如何避免与读者对立
+用词
+如何避免过于通俗的用词、如何避免过于书面化的用词
+《沉默的大多数》摘要</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-01-12
+          </div>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/12/24/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">【算法】动态规划</a>
+
+      <a href="/2020/12/24/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="index-excerpt">
+        
+        
+          
+        
+        <div>动态规划理论对于一个问题，若满足如下3个条件，则可以用动态规划方法解决：
+具有最优子结构：任意找一个中间状态，若这个解要成为全局最优解，那么从该状态到末状态的决策必定是该状态下的最优解
+注：若最优解能推导出从初始状态到中间状态的解也是最优的，那么就可以用贪心法。不需要DP
+无后效性：一个状态即包含后续决策所需的所有前置信息。过去决策无法直接影响未来决策，而必须通过当前状态传递信息。
+重复子问题：在</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-12-24
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/12/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%9B%BE%E6%90%9C%E7%B4%A2/">【算法】图搜索</a>
+
+      <a href="/2020/12/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%9B%BE%E6%90%9C%E7%B4%A2/" class="index-excerpt">
+        
+        
+          
+        
+        <div>图搜索组合优化非数值优化问题：给出一些条件，选取一种最优的“状态”。每个状态之间是有关联的，所以可以用图或者树的方式将状态联系起来。
+注：局部解就是一个不完全的解，类似于八皇后只给出4个皇后的位置
+回溯法：类似深度优先搜索，只要局部解有可行性就继续深入，直到解不可行再回溯到可能可行的局部解
+分支界限法：类似广度优先搜索，先计算出不可行的点的范围，再对可行的范围按照解最可能存在的顺序一一搜索。
+剪枝</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-12-23
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/12/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95/">【算法】随机算法</a>
+
+      <a href="/2020/12/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>随机算法概念随机性：算法中引入随机数，多次运行，结果可能不同。
+线性同余法：用于产生伪随机数，思路把上一个随机数变成ax+b，然后对M取余。要求M必须很大（这样分布才广），第一个数称为种子。
+应用计算圆周率、计算函数定积分随机算法相当于近似地取面积，对于精度要求不高的情况很合适。
+随机搜索非线性方程的解用满足正态分布或均匀分布的方式搜索。
+舍伍德算法思想：随机化输入/中间取值，以避免不好的样例对复</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-12-23
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/12/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/">【算法】算法优化策略</a>
+
+      <a href="/2020/12/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" class="index-excerpt">
+        
+        
+          
+        
+        <div>算法优化策略存储结构采用特定存储结构可能带来某一操作更优的性能（比如堆可以直接找到最值，线性表可直接按下标访问）
+时间空间复杂度互换若求解较大N时需要用到较小N的结论，则适合顺序求解。将逆序求解改为顺序求解可以极大减少重复计算次数。代价只是存储了多余的结论
+散列，牺牲空间复杂度来换取接近理想的时间复杂度
+算法的组合快排改进：当N较小时用插入排序，或者不排序而在最后用一次插入排序。
+非线性方程的求解</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-12-23
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/24/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B/">【算法】非线性方程组</a>
+
+      <a href="/2020/11/24/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B/" class="index-excerpt">
+        
+        
+          
+        
+        <div>非线性方程组概念病态问题：若函数在零点附近切线接近水平，则求根问题病态：切线y的变化会造成x的剧烈变动。
+收敛速度：假设迭代进行很久以后，每一步迭代的误差都是上一步误差的r阶量，则称为r阶收敛（一阶=线性，二阶=平方，三阶以上=超线性）
+判停：一般通过固定的迭代步数、每一步的误差变化、残差（？）
+非线性方程的解法二分法
+条件：需要知道解的区间、方程连续（适用于介值定理）思路：对区间用介值定理不断二</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-24
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+            
+              <a href="/categories/%E7%AE%97%E6%B3%95/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">数值计算</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/18/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84/">【算法】线性方程组</a>
+
+      <a href="/2020/11/18/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84/" class="index-excerpt">
+        
+        
+          
+        
+        <div>解线性方程组高斯消元法OJ7思路a^b=c可以推出a=b^c 由此将线性方程组的加法和减法都映射到异或运算
+两个矩阵：一个点是否使用刷子（矩阵A）和一个点的颜色（矩阵B）
+设前两行是否用刷子为未知量，可以递推求出所有点是否使用刷子的表达式。只要在前两行的每个点作十字，可以发现只有一个位置是不确定的，利用异或性质即可得到方程。
+因为递推式根据前两行的“假设”推出A的所有点，每一行的假设都可以让向前第</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-18
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+            
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/10/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">【算法】数值计算</a>
+
+      <a href="/2020/11/10/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="index-excerpt">
+        
+        
+          
+        
+        <div>数值计算基本概念适定/不适定问题：给定条件是否能求出唯一的、稳定的、连续依赖于条件的解
+病态问题：条件的微小波动导致解的极大波动，就是病态的
+有效数字：绝对误差小于0.05，则精确到小数点后1位，即0.1,有效数字是从0.1开始（包括0.1）向前的数字（开头0.00的部分不算）
+截断误差：算法层面上，无限求和截断成有限求和，无限细分近似有限细分而产生的误差
+舍入误差：计算层面上，无限精度小数舍入为</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-10
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">数值计算</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/11/08/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84dijkstra%E7%AE%97%E6%B3%95/">【算法】单源最短路径dijkstra算法</a>
+
+      <a href="/2020/11/08/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84dijkstra%E7%AE%97%E6%B3%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>dijkstra算法以及第七周OJdijkstra算法理解运行过程运行一次dijkstra算法只能求出给定点到图中所有点的最短距离以及最短路径。
+假设一个顶点数为n、边数为e的图，需要两张表：第一张表大小为n，记录给定点到图中所有点的最短路径，这张表在过程中会不断更新；第二张表是最短路径树SPT，在单源情况下，这个树只是从起点到n个节点的二层带权n叉树，被添加的最短路径都是确定的路径，不会被更改。</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-11-08
+          </div>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
