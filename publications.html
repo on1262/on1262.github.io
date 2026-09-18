@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Publications by Yutong Chen on large language models, reinforcement learning, and facial animation.">
+  <meta name="description" content="Publications by Yutong Chen on large language models, reinforcement learning, self-distillation, and facial animation.">
   <title>Publications | Yutong Chen</title>
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -18,8 +18,17 @@
       <div class="profile-links"><a class="button" href="https://github.com/on1262" target="_blank" rel="noopener">GitHub</a><a class="button primary" href="files/Yutong_Chen_CV.pdf">Download CV</a></div>
     </aside>
     <main class="content" id="main">
-      <header class="content-header"><p class="eyebrow">Scholarship</p><h2>Publications</h2><p class="lede">Research on efficient post-training, reasoning models, and controllable generative systems.</p></header>
+      <header class="content-header"><p class="eyebrow">Scholarship</p><h2>Publications</h2><p class="lede">Research on adaptive self-distillation, efficient post-training, reasoning models, and controllable generative systems.</p></header>
       <section class="pub-list" aria-label="Publication list">
+        <article class="publication">
+          <span class="pub-type">Preprint · 2026</span>
+          <h3>DualOPSD: Adaptive Privileged Teachers for On-Policy Self-Distillation</h3>
+          <p class="authors"><strong>Yutong Chen</strong>, Guangfu Guo, Zhichao Xu, Kunpeng Liu</p>
+          <p class="venue">arXiv:2608.26019</p>
+          <p>DualOPSD turns a fixed privileged teacher into an adaptive teaching policy. The student first learns from privileged supervision; the teacher then moves toward the updated student distribution on the same trajectory, improving future supervision without another rollout.</p>
+          <p>On Qwen3-8B, DualOPSD improves avg@12 over OPSD by 23.61, 13.89, and 10.00 points on AIME 2024, AIME 2025, and HMMT 2025, respectively.</p>
+          <div class="pub-actions"><a class="button" href="https://arxiv.org/abs/2608.26019" target="_blank" rel="noopener">arXiv</a><a class="button" href="https://arxiv.org/html/2608.26019v1" target="_blank" rel="noopener">HTML</a></div>
+        </article>
         <article class="publication">
           <span class="pub-type">Preprint · 2026</span>
           <h3>CoScale-RL: Efficient Post-Training by Co-Scaling Data and Computation</h3>

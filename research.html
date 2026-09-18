@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Research experience of Yutong Chen in efficient post-training, R1-style reinforcement learning, and facial animation.">
+  <meta name="description" content="Research experience of Yutong Chen in adaptive self-distillation, efficient post-training, R1-style reinforcement learning, and facial animation.">
   <title>Research | Yutong Chen</title>
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -18,8 +18,15 @@
       <div class="profile-links"><a class="button" href="https://github.com/on1262" target="_blank" rel="noopener">GitHub</a><a class="button primary" href="files/Yutong_Chen_CV.pdf">Download CV</a></div>
     </aside>
     <main class="content" id="main">
-      <header class="content-header"><p class="eyebrow">Selected work</p><h2>Research</h2><p class="lede">I build and analyze learning strategies that help models reason better without relying on ever-larger datasets or budgets.</p></header>
+      <header class="content-header"><p class="eyebrow">Selected work</p><h2>Research</h2><p class="lede">I build and analyze adaptive learning strategies that help models reason better without relying on ever-larger datasets or budgets.</p></header>
       <section aria-label="Research projects">
+        <article class="research-card">
+          <h3>DualOPSD: Adaptive Privileged Teachers</h3><p class="meta">CLAIM Lab, Clemson University · 2026</p>
+          <p>On-policy self-distillation uses a privileged copy of the student model to provide dense token-level supervision, but prior approaches keep that teacher fixed while the student distribution and output style change. DualOPSD closes this loop: the student learns conservatively from privileged supervision, and the teacher then adapts toward the updated student distribution on the same student trajectory.</p>
+          <p>The asymmetric alternating update changes future supervision without requiring an additional rollout or a correctness verifier. Experiments across Qwen3 models also reveal a scale-dependent benefit: teacher adaptation helps at 4B and 8B, while the smallest 1.7B model does not improve.</p>
+          <p class="result"><strong>Key result:</strong> On Qwen3-8B, DualOPSD raises avg@12 over OPSD by 23.61 points on AIME 2024, 13.89 points on AIME 2025, and 10.00 points on HMMT 2025. It also reduces truncation across all three tested model scales.</p>
+          <div class="pub-actions"><a class="button" href="https://arxiv.org/abs/2608.26019" target="_blank" rel="noopener">Read the paper</a><a class="button" href="https://arxiv.org/html/2608.26019v1" target="_blank" rel="noopener">Read HTML</a></div>
+        </article>
         <article class="research-card">
           <h3>CoScale-RL</h3><p class="meta">Multimedia Signal and Intelligent Information Processing Lab, Tsinghua University · Aug 2025–Jan 2026</p>
           <p>Training large reasoning models can be unstable on difficult problems or with weaker foundation models. We scale the number of solutions per problem to improve solvability, then scale rollout computation to stabilize reinforcement learning. A model-merging technique called re-distillation helps sustain efficiency as computation grows.</p>
